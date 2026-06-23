@@ -85,10 +85,11 @@
   }
 
   function submit() {
-    var nome  = document.getElementById('field-nome').value.trim();
-    var email = document.getElementById('field-email').value.trim();
-    var tipo  = document.getElementById('field-tipo').value;
-    var desc  = document.getElementById('field-desc').value.trim();
+    var nome   = document.getElementById('field-nome').value.trim();
+    var email  = document.getElementById('field-email').value.trim();
+    var tipo   = document.getElementById('field-tipo').value;
+    var desc   = document.getElementById('field-desc').value.trim();
+    var budget = document.getElementById('budget-label').textContent;
 
     clearAllErrors();
 
@@ -101,12 +102,45 @@
       return;
     }
 
-    var firstName = nome.split(' ')[0];
-    successMsg.textContent =
-      'Grazie ' + firstName + ' — ho ricevuto la tua richiesta e ti scrivo entro un paio di giorni.';
+    var submitBtn = form.querySelector('[type="submit"]');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Invio in corso…';
 
-    form.style.display = 'none';
-    successBox.style.display = 'block';
+    var data = new FormData();
+    data.append('Nome', nome);
+    data.append('Email', email);
+    data.append('Tipo prodotto', tipo);
+    data.append('Descrizione', desc);
+    data.append('Budget', budget);
+
+    var fileInput = document.getElementById('field-file');
+    if (fileInput && fileInput.files[0]) {
+      data.append('Allegato', fileInput.files[0]);
+    }
+
+    fetch('https://formspree.io/f/xzdlzyjb', {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(function (res) {
+      if (res.ok) {
+        var firstName = nome.split(' ')[0];
+        successMsg.textContent =
+          'Grazie ' + firstName + ' — ho ricevuto la tua richiesta e ti scrivo entro un paio di giorni.';
+        form.style.display = 'none';
+        successBox.style.display = 'block';
+      } else {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Invia la tua idea →';
+        alert('Qualcosa è andato storto. Riprova o scrivimi direttamente su WhatsApp.');
+      }
+    })
+    .catch(function () {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Invia la tua idea →';
+      alert('Errore di connessione. Riprova o scrivimi direttamente su WhatsApp.');
+    });
   }
 
   /* ── Reset ── */
