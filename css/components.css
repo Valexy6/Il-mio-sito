@@ -37,6 +37,75 @@
 
 .nav__link:hover { color: var(--teal); }
 
+/* ── Hamburger button (mobile only) ── */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.nav-toggle span {
+  display: block;
+  height: 2px;
+  background: var(--border-dark);
+  border-radius: 2px;
+  transition: transform .25s, opacity .25s;
+}
+
+.nav-toggle.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.is-open span:nth-child(2) { opacity: 0; }
+.nav-toggle.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+@media (max-width: 640px) {
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    background: rgba(255,255,255,.97);
+    border-bottom: 2px solid var(--border);
+    padding: 8px 0;
+    backdrop-filter: blur(12px);
+  }
+
+  .nav.is-open {
+    display: flex;
+  }
+
+  .nav__link {
+    padding: 14px var(--pad-x);
+    font-size: 15px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav__link:last-child {
+    border-bottom: none;
+  }
+
+  .site-header {
+    position: sticky;
+    top: 0;
+  }
+
+  .site-header__inner {
+    position: relative;
+  }
+}
+
 /* ── Section label ── */
 .section-label {
   font-family: var(--font-mono);
