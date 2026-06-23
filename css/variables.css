@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap');
+
+:root {
+  /* ── Palette ── */
+  --bg:            #ffffff;
+  --bg-card:       #f9fafb;
+  --bg-shop:       #f3f4f6;
+  --border:        #e5e7eb;
+  --border-dark:   #d1d5db;
+
+  --text:          #111827;
+  --text-muted:    #374151;
+  --text-dim:      #6b7280;
+  --text-faint:    #9ca3af;
+
+  --orange:        #b9f500;
+  --orange-light:  #d4f542;
+  --teal:          #4f46e5;
+  --teal-light:    #818cf8;
+  --error:         #ef4444;
+
+  /* ── Typography ── */
+  --font-display:  'Anton', sans-serif;
+  --font-body:     'Archivo', sans-serif;
+  --font-mono:     'Space Mono', monospace;
+
+  /* ── Layout ── */
+  --max-width:     1240px;
+  --pad-x:         clamp(16px, 4vw, 40px);
+  --pad-y:         clamp(56px, 9vw, 110px);
+}

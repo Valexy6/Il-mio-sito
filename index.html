@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Valerio Ballaró — Sviluppatore · Maker · Creativo</title>
+
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+  <!-- ════════════════════════════════
+       HEADER / NAV
+  ════════════════════════════════ -->
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="#hero" class="logo">
+        <span class="logo__dot"></span>
+        VB
+      </a>
+      <nav class="nav" aria-label="Navigazione principale">
+        <a href="#about"    class="nav__link">About me</a>
+        <a href="#shop"     class="nav__link">Shop</a>
+        <a href="#buio"     class="nav__link">Ordine al buio</a>
+        <a href="#ordini"   class="nav__link">Ordini</a>
+        <a href="#contatti" class="nav__link">Contatti</a>
+      </nav>
+    </div>
+  </header>
+
+
+  <!-- ════════════════════════════════
+       HERO
+  ════════════════════════════════ -->
+  <section id="hero" class="hero">
+    <div class="hero__grid-bg" aria-hidden="true"></div>
+
+    <div class="hero__inner">
+
+      <!-- Copy -->
+      <div>
+        
+        <h1 class="hero__title">
+          Valerio<br>
+          <span class="hero__title-accent">Ballaró</span>
+        </h1>
+        <p class="hero__tagline">
+          Scrivo <span class="accent-teal">codice</span>.
+          Stampo <span class="accent-orange">idee</span>
+          e qualche volta le <span class="accent-under">indosso</span>.
+        </p>
+        <div class="hero__ctas">
+          <a href="#shop"   class="btn btn--primary">Esplora i prodotti →</a>
+          <a href="#ordini" class="btn btn--ghost">Ordini personalizzati</a>
+        </div>
+      </div>
+
+      <!-- One Piece Jolly Roger -->
+      <div class="flag-container" aria-hidden="true">
+        <svg class="flag-svg" viewBox="0 0 300 230" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="pole-grad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%"   stop-color="#2a2018"/>
+              <stop offset="50%"  stop-color="#7a6a50"/>
+              <stop offset="100%" stop-color="#2a2018"/>
+            </linearGradient>
+            <!-- Fabric wave via animated displacement map -->
+            <filter id="flag-wave" x="-5%" y="-10%" width="116%" height="122%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.022 0.055" numOctaves="2" seed="4" result="noise">
+                <animate attributeName="baseFrequency"
+                  values="0.022 0.055;0.038 0.085;0.022 0.055"
+                  dur="3.8s"
+                  repeatCount="indefinite"/>
+              </feTurbulence>
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="11" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+          </defs>
+
+          <!-- Pole (unfiltered — stays rigid) -->
+          <rect x="3" y="0" width="8" height="230" rx="4" fill="url(#pole-grad)"/>
+          <!-- Pole shine -->
+          <rect x="5" y="0" width="2" height="230" rx="1" fill="rgba(255,255,255,.12)"/>
+
+          <!-- Flag cloth with wave filter -->
+          <g filter="url(#flag-wave)">
+            <!-- Black background -->
+            <rect x="11" y="10" width="283" height="208" rx="2" fill="#16140f"/>
+
+            <!-- ── Crossbones ── -->
+            <line x1="84" y1="62" x2="232" y2="172" stroke="white" stroke-width="17" stroke-linecap="round"/>
+            <line x1="232" y1="62" x2="84" y2="172" stroke="white" stroke-width="17" stroke-linecap="round"/>
+            <circle cx="84"  cy="62"  r="12" fill="white"/>
+            <circle cx="232" cy="62"  r="12" fill="white"/>
+            <circle cx="84"  cy="172" r="12" fill="white"/>
+            <circle cx="232" cy="172" r="12" fill="white"/>
+
+            <!-- ── Skull head ── -->
+            <ellipse cx="158" cy="118" rx="47" ry="44" fill="white"/>
+            <!-- Jaw -->
+            <rect x="126" y="139" width="64" height="25" rx="7" fill="white"/>
+            <!-- Teeth gaps (dark slots → white teeth between them) -->
+            <rect x="131" y="144" width="11" height="20" rx="2" fill="#16140f"/>
+            <rect x="146" y="144" width="11" height="20" rx="2" fill="#16140f"/>
+            <rect x="161" y="144" width="11" height="20" rx="2" fill="#16140f"/>
+            <rect x="176" y="144" width="11" height="20" rx="2" fill="#16140f"/>
+            <!-- Eye sockets -->
+            <ellipse cx="140" cy="114" rx="16" ry="16" fill="#16140f"/>
+            <ellipse cx="176" cy="114" rx="16" ry="16" fill="#16140f"/>
+            <!-- Nose hole -->
+            <path d="M151 132 L158 122 L165 132 Z" fill="#16140f"/>
+
+            <!-- ── Straw Hat (drawn after skull so it sits on top) ── -->
+            <!-- Brim — very wide flat oval -->
+            <ellipse cx="158" cy="80" rx="84" ry="13" fill="#a87810"/>
+            <!-- Brim top sheen -->
+            <ellipse cx="158" cy="78" rx="84" ry="9"  fill="#c49018" opacity="0.7"/>
+            <!-- Dome -->
+            <ellipse cx="158" cy="58" rx="45" ry="38" fill="#cc9a14"/>
+            <!-- Dome highlight -->
+            <ellipse cx="148" cy="44" rx="24" ry="11" fill="#e8b82e" opacity="0.42"/>
+            <!-- Band (red) -->
+            <rect x="115" y="73" width="86" height="14" rx="4" fill="#991616"/>
+            <!-- Band highlight -->
+            <rect x="115" y="73" width="86" height="6"  rx="3" fill="#c02020" opacity="0.65"/>
+          </g>
+        </svg>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════
+       MARQUEE
+  ════════════════════════════════ -->
+  <div class="marquee-strip" aria-hidden="true">
+    <div class="marquee-track">
+      <span class="marquee-track__chunk">
+        <span style="color:var(--teal)">Codice</span><span>—</span>
+        <span style="color:var(--orange)">Stampa 3D</span><span>—</span>
+        <span>T-Shirt</span><span>—</span>
+        <span style="color:var(--teal)">Maker</span><span>—</span>
+        <span style="color:var(--orange)">Insonnia</span><span>—</span>
+      </span>
+      <span class="marquee-track__chunk">
+        <span style="color:var(--teal)">Codice</span><span>—</span>
+        <span style="color:var(--orange)">Stampa 3D</span><span>—</span>
+        <span>T-Shirt</span><span>—</span>
+        <span style="color:var(--teal)">Maker</span><span>—</span>
+        <span style="color:var(--orange)">Fatto a mano</span><span>—</span>
+      </span>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════
+       CHI SONO
+  ════════════════════════════════ -->
+  <section id="about" class="about">
+
+    <p class="section-label section-label--orange reveal">// CHI SONO</p>
+
+    <div class="about__grid">
+
+      <!-- Text column -->
+      <div>
+        <h2 class="about__heading reveal">Costruisco cose,<br>digitali e fisiche</h2>
+        <p class="about__body reveal">
+          Di giorno scrivo software. Il resto del tempo lo passo davanti a una stampante 3D che
+          ronza o a un piano di lavoro pieno di magliette e fogli di transfer.
+        </p>
+        <p class="about__body reveal">
+          Mi piace l'idea che un'idea possa diventare
+          <span style="color:var(--teal)">una funzione</span> oppure
+          <span style="color:var(--orange)">un oggetto che tieni in mano</span>.
+          Faccio entrambe le cose, e le vendo.
+        </p>
+      </div>
+
+      <!-- Soul cards -->
+      <div class="about__cards">
+        <div class="soul-card soul-card--dev reveal">
+          <span class="soul-card__number soul-card__number--teal">01</span>
+          <div>
+            <p class="soul-card__title">Dev</p>
+            <p class="soul-card__desc">Sviluppo cose</p>
+          </div>
+        </div>
+        <div class="soul-card soul-card--warm reveal">
+          <span class="soul-card__number soul-card__number--orange">02</span>
+          <div>
+            <p class="soul-card__title">Stampa 3D</p>
+            <p class="soul-card__desc">Stampo cose</p>
+       
+          </div>
+        </div>
+        <div class="soul-card soul-card--warm reveal">
+          <span class="soul-card__number soul-card__number--orange">03</span>
+          <div>
+            <p class="soul-card__title">T-Shirt</p>
+            <p class="soul-card__desc">Personalizzo T-shirt
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    
+
+    <!-- Personal detail -->
+    <div class="callout reveal">
+      <div class="callout__emoji" aria-hidden="true">
+        <img src="assets/images/occhisgranati.png" alt="" style="width: 200px; height: 140px; object-fit: contain; display: block;">
+      </div>
+      <div>
+        <p class="callout__meta">Dovresti sapere che</p>
+        <p class="callout__text">
+          La mia insonnia guida la mia creativitá. Niente caffè — sono già sveglio. Se mi scrivi di notte, è probabile che ti risponda subito — o che stia già lavorando alla tua idea.
+        </p>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ════════════════════════════════
+       SHOP
+  ════════════════════════════════ -->
+  <section id="shop" class="shop">
+    <div class="section-inner">
+
+      
+      <h2 class="shop__title">Roba che ho fatto<br>e che puoi comprare</h2>
+      <p class="shop__subtitle">Compra i miei prodotti e contribuisci al mio fondo melatonina</p>
+
+      <!-- ── 3D Prints ── -->
+      <div class="shop__category-header">
+        <div class="shop__category-dot" style="background:var(--orange)"></div>
+        <h3 class="shop__category-title">Oggetti stampati in 3D</h3>
+        <div class="shop__category-line"></div>
+      </div>
+
+      <div class="shop__product-grid" style="margin-bottom:64px">
+
+        <article class="product-card product-card--print reveal">
+          <div class="product-card__image product-card__image--print">
+            <span class="product-card__placeholder">[ render: vaso voronoi ]</span>
+            <span class="product-card__badge product-card__badge--orange">Ed. limitata</span>
+          </div>
+          <div class="product-card__body">
+            <h4 class="product-card__name">Vaso Voronoi</h4>
+            <p class="product-card__desc">Vaso a celle organiche, stampato in PLA opaco.</p>
+            <div class="product-card__footer">
+              <span class="product-card__price product-card__price--orange">€24</span>
+              <a class="buy-btn" href="https://wa.me/393273818658?text=Ciao%20Valerio!%20Vorrei%20acquistare%3A%20Vaso%20Voronoi%20(%E2%82%AC24)" target="_blank" rel="noopener">Acquista</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card product-card--print reveal">
+          <div class="product-card__image product-card__image--print">
+            <span class="product-card__placeholder">[ render: lampada gyroid ]</span>
+            <span class="product-card__badge product-card__badge--orange">Fatto a mano</span>
+          </div>
+          <div class="product-card__body">
+            <h4 class="product-card__name">Lampada Gyroid</h4>
+            <p class="product-card__desc">Paralume a struttura gyroid, diffonde luce calda.</p>
+            <div class="product-card__footer">
+              <span class="product-card__price product-card__price--orange">€38</span>
+              <a class="buy-btn" href="https://wa.me/393273818658?text=Ciao%20Valerio!%20Vorrei%20acquistare%3A%20Lampada%20Gyroid%20(%E2%82%AC38)" target="_blank" rel="noopener">Acquista</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card product-card--print reveal">
+          <div class="product-card__image product-card__image--print">
+            <span class="product-card__placeholder">[ render: organizer ]</span>
+            <span class="product-card__badge product-card__badge--orange">Su richiesta</span>
+          </div>
+          <div class="product-card__body">
+            <h4 class="product-card__name">Organizer Modulare</h4>
+            <p class="product-card__desc">Moduli a incastro per la scrivania. Compri quanti vuoi.</p>
+            <div class="product-card__footer">
+              <span class="product-card__price product-card__price--orange">€16</span>
+              <a class="buy-btn" href="https://wa.me/393273818658?text=Ciao%20Valerio!%20Vorrei%20acquistare%3A%20Organizer%20Modulare%20(%E2%82%AC16)" target="_blank" rel="noopener">Acquista</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card product-card--print reveal">
+          <div class="product-card__image product-card__image--print">
+            <span class="product-card__placeholder">[ render: fioriera ]</span>
+            <span class="product-card__badge product-card__badge--orange">Fatto a mano</span>
+          </div>
+          <div class="product-card__body">
+            <h4 class="product-card__name">Fioriera Geometrica</h4>
+            <p class="product-card__desc">Fioriera low-poly con sottovaso integrato.</p>
+            <div class="product-card__footer">
+              <span class="product-card__price product-card__price--orange">€29</span>
+              <a class="buy-btn" href="https://wa.me/393273818658?text=Ciao%20Valerio!%20Vorrei%20acquistare%3A%20Fioriera%20Geometrica%20(%E2%82%AC29)" target="_blank" rel="noopener">Acquista</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- ── T-Shirts ── -->
+      <div class="shop__category-header">
+        <div class="shop__category-dot" style="background:var(--teal)"></div>
+        <h3 class="shop__category-title">T-shirt personalizzate</h3>
+        <div class="shop__category-line"></div>
+      </div>
+
+      <div class="shop__product-grid">
+
+        <article class="product-card product-card--shirt reveal">
+          <div class="product-card__image product-card__image--shirt">
+            <span class="product-card__placeholder">[ foto: t-shirt layer lines ]</span>
+            <span class="product-card__badge product-card__badge--teal">Ed. limitata</span>
+          </div>
+          <div class="product-card__body">
+            <h4 class="product-card__name">Layer Lines</h4>
+            <p class="product-card__desc">Stampa serigrafica ispirata alle linee di stampa.</p>
+            <div class="product-card__footer">
+              <span class="product-card__price product-card__price--teal">€26</span>
+              <a class="buy-btn" href="https://wa.me/393273818658?text=Ciao%20Valerio!%20Vorrei%20acquistare%3A%20Layer%20Lines%20(%E2%82%AC26)" target="_blank" rel="noopener">Acquista</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card product-card--shirt reveal">
+          <div class="product-card__image product-card__image--shirt">
+            <span class="product-card__placeholder">[ foto: t-shirt 404 ]</span>
+            <span class="product-card__badge product-card__badge--teal">Best seller</span>
+          </div>
+          <div class="product-card__body">
+            <h4 class="product-card__name">404 Not Found</h4>
+            <p class="product-card__desc">Per chi vive di errori di compilazione.</p>
+            <div class="product-card__footer">
+              <span class="product-card__price product-card__price--teal">€25</span>
+              <a class="buy-btn" href="https://wa.me/393273818658?text=Ciao%20Valerio!%20Vorrei%20acquistare%3A%20404%20Not%20Found%20(%E2%82%AC25)" target="_blank" rel="noopener">Acquista</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card product-card--shirt reveal">
+          <div class="product-card__image product-card__image--shirt">
+            <span class="product-card__placeholder">[ foto: t-shirt estrusione ]</span>
+            <span class="product-card__badge product-card__badge--teal">Fatto a mano</span>
+          </div>
+          <div class="product-card__body">
+            <h4 class="product-card__name">Estrusione</h4>
+            <p class="product-card__desc">Tipografia che cola come filamento caldo.</p>
+            <div class="product-card__footer">
+              <span class="product-card__price product-card__price--teal">€30</span>
+              <a class="buy-btn" href="https://wa.me/393273818658?text=Ciao%20Valerio!%20Vorrei%20acquistare%3A%20Estrusione%20(%E2%82%AC30)" target="_blank" rel="noopener">Acquista</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card product-card--shirt reveal">
+          <div class="product-card__image product-card__image--shirt">
+            <span class="product-card__placeholder">[ foto: t-shirt glitch ]</span>
+            <span class="product-card__badge product-card__badge--teal">Pezzo unico</span>
+          </div>
+          <div class="product-card__body">
+            <h4 class="product-card__name">Glitch</h4>
+            <p class="product-card__desc">Grafica glitch stampata a mano, ogni pezzo è diverso.</p>
+            <div class="product-card__footer">
+              <span class="product-card__price product-card__price--teal">€28</span>
+              <a class="buy-btn" href="https://wa.me/393273818658?text=Ciao%20Valerio!%20Vorrei%20acquistare%3A%20Glitch%20(%E2%82%AC28)" target="_blank" rel="noopener">Acquista</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════
+       ORDINE AL BUIO
+  ════════════════════════════════ -->
+  <section id="buio" class="blind-order">
+    <div class="section-inner">
+      
+      <h2 class="blind-order__title reveal">Non sai cosa<br>scegliere?</h2>
+      <p class="blind-order__tagline reveal">Non scegliere.<br><span>Lo faccio io per te.</span></p>
+      <a href="buio.html" class="btn btn--primary blind-order__cta reveal">Tenta la fortuna →</a>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════
+       ORDINI SU MISURA
+  ════════════════════════════════ -->
+  <section id="ordini" class="orders">
+    <div class="section-inner section-inner--narrow">
+
+      
+      <h2 class="orders__title">Hai un'idea?<br>Parliamone insieme</h2>
+      <p class="orders__intro">
+        
+      </p>
+
+      <!-- Success state -->
+      <div id="form-success" class="form-success" role="alert">
+        <div class="form-success__icon" aria-hidden="true">✓</div>
+        <p class="form-success__title">Idea ricevuta!</p>
+        <p id="success-msg" class="form-success__msg"></p>
+        <button id="reset-btn" class="btn--reset" type="button">Invia un'altra idea</button>
+      </div>
+
+      <!-- Form -->
+      <form id="order-form" class="form" novalidate>
+
+        <div class="form__row">
+          <div class="form__field">
+            <label for="field-nome" class="form__label">Nome e cognome</label>
+            <input id="field-nome" class="form__input" type="text" placeholder="Mario Rossi" autocomplete="name">
+            <span id="err-nome" class="form__error" role="alert"></span>
+          </div>
+          <div class="form__field">
+            <label for="field-email" class="form__label">Email</label>
+            <input id="field-email" class="form__input" type="email" placeholder="mario@esempio.it" autocomplete="email">
+            <span id="err-email" class="form__error" role="alert"></span>
+          </div>
+        </div>
+
+        <div class="form__field">
+          <label for="field-tipo" class="form__label">Tipo di prodotto</label>
+          <select id="field-tipo" class="form__select">
+            <option value="">Seleziona…</option>
+            <option value="Stampa 3D">Stampa 3D</option>
+            <option value="T-shirt">T-shirt</option>
+            <option value="Altro">Altro</option>
+          </select>
+          <span id="err-tipo" class="form__error" role="alert"></span>
+        </div>
+
+        <div class="form__field">
+          <label for="field-desc" class="form__label">Descrizione della richiesta</label>
+          <textarea id="field-desc" class="form__textarea" rows="5"
+            placeholder="Vorrei una lampada con una texture organica, alta circa 25cm…"></textarea>
+          <span id="err-desc" class="form__error" role="alert"></span>
+        </div>
+
+        <div class="form__field">
+          <div class="form__budget-header">
+            <span>Budget indicativo</span>
+            <span id="budget-label" class="form__budget-value">€150</span>
+          </div>
+          <input id="field-budget" class="form__range" type="range" min="10" max="2000" step="10" value="150">
+          <div class="form__range-labels"><span>€10</span><span>€2000+</span></div>
+        </div>
+
+        <div class="form__field">
+          <label class="form__label">
+            Allegato
+            <span class="form__label-note">(opzionale — foto o reference)</span>
+          </label>
+          <label class="form__file-label">
+            <span class="form__file-btn">Scegli file</span>
+            <span id="file-name" class="form__file-name">Nessun file selezionato</span>
+            <input id="field-file" type="file" style="display:none" aria-label="Carica un file allegato">
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn--submit">Invia la tua idea →</button>
+
+      </form>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════
+       CONTATTI
+  ════════════════════════════════ -->
+  <section id="contatti" class="contacts">
+    <div class="section-inner">
+
+      
+
+      <a href="mailto:valerio.ballaroxy@gmail.com" class="email-link">
+        valerio.ballaroxy@gmail.com
+      </a>
+
+      <div class="social-links">
+        <a href="#" class="social-link">Instagram ↗</a>
+        <a href="#" class="social-link">GitHub ↗</a>
+        <a href="#" class="social-link">LinkedIn ↗</a>
+      </div>
+
+      <footer class="contacts__footer">
+        <div>
+          
+          <p class="footer__tagline">
+            Se si può scrivere o stampare,
+            <span class="footer__tagline-accent">si può fare</span>!
+          </p>
+        </div>
+        <div class="footer__credits">
+          © 2026 Valerio Ballaró<br>
+          made_with: <span class="c-teal">Coca Cola zero</span> + <span class="c-orange">filamento</span><span class="footer__cursor" aria-hidden="true"></span>
+        </div>
+      </footer>
+
+    </div>
+  </section>
+
+
+  <script src="js/reveal.js"></script>
+  <script src="js/form.js"></script>
+
+</body>
+</html>

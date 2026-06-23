@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ordine al buio — Valerio Ballaró</title>
+
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="index.html" class="logo">
+        <span class="logo__dot"></span>
+        VB//
+      </a>
+      <nav class="nav" aria-label="Navigazione principale">
+        <a href="index.html#about"    class="nav__link">About me</a>
+        <a href="index.html#shop"     class="nav__link">Shop</a>
+        <a href="index.html#buio"     class="nav__link" style="color:var(--orange)">Ordine al buio</a>
+        <a href="index.html#ordini"   class="nav__link">Ordini</a>
+        <a href="index.html#contatti" class="nav__link">Contatti</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="buio-page">
+    <div class="buio-page__inner">
+
+      <p class="section-label section-label--orange">// ORDINE AL BUIO</p>
+
+      <h1 class="buio-page__title">
+        Non sai cosa comprare<br>o regalare?
+      </h1>
+      <p class="buio-page__sub">
+        Scegli di <span style="background:var(--orange);color:#111827;padding:0 6px;">non scegliere</span>.
+      </p>
+      <p class="buio-page__desc">
+        Potrebbe essere un oggetto stampato in 3D o una t-shirt.
+        Non lo sai in anticipo. È questo il bello.
+        (Per gli articoli al buio come per i personalizzati, non si accettano resi Maledett*)
+      </p>
+
+      <div class="buio-card">
+
+        <div class="buio-card__top">
+          <div>
+            <p class="buio-card__label">Prezzo fisso</p>
+            <p class="buio-card__price">€10 <span>/ pezzo</span></p>
+          </div>
+          <div class="buio-card__badge">Sorpresa garantita</div>
+        </div>
+
+        <ul class="buio-card__perks">
+          <li>✓ Un prodotto scelto da me</li>
+          <li>✓ Potrebbe essere stampa 3D o t-shirt</li>
+          <li>✓ Confezionato e spedito con le mie manine</li>
+          <li>✓ Non si accettano resi </li>
+        </ul>
+
+        <div class="buio-card__qty-row">
+          <label for="qty" class="buio-card__qty-label">Quanti ne vuoi?</label>
+          <div class="buio-card__qty-controls">
+            <button type="button" id="qty-minus" class="qty-btn" aria-label="Diminuisci">−</button>
+            <span id="qty-display" class="qty-display">1</span>
+            <button type="button" id="qty-plus"  class="qty-btn" aria-label="Aumenta">+</button>
+          </div>
+        </div>
+
+        <div class="buio-card__total-row">
+          <span class="buio-card__total-label">Totale</span>
+          <span id="total-price" class="buio-card__total-price">€10</span>
+        </div>
+
+        <button type="button" class="btn btn--primary buio-card__cta" id="buy-buio">
+          Vai — tanto cosa puoi perdere? →
+        </button>
+
+        <p class="buio-card__note">Cliccando sarai contattato via email per la spedizione.</p>
+
+      </div>
+
+      <a href="index.html" class="buio-back">← Torna allo shop</a>
+
+    </div>
+  </main>
+
+  <script>
+    const display = document.getElementById('qty-display');
+    const total   = document.getElementById('total-price');
+    let qty = 1;
+
+    function update() {
+      display.textContent = qty;
+      total.textContent   = '€' + (qty * 10);
+      document.getElementById('qty-minus').disabled = qty <= 1;
+    }
+
+    document.getElementById('qty-minus').addEventListener('click', () => { if (qty > 1) { qty--; update(); } });
+    document.getElementById('qty-plus').addEventListener('click',  () => { qty++; update(); });
+
+    document.getElementById('buy-buio').addEventListener('click', () => {
+      const totale = qty * 10;
+      const msg = encodeURIComponent(`Ciao Valerio! Voglio fare un ordine al buio: ${qty} pezzo${qty > 1 ? 'i' : ''} — Totale €${totale}`);
+      window.open(`https://wa.me/393273818658?text=${msg}`, '_blank');
+    });
+
+    update();
+  </script>
+
+</body>
+</html>
