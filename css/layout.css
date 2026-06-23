@@ -59,19 +59,29 @@
 
 /* ── Flag ── */
 .flag-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  min-height: 380px;
+  display: none;
+}
+
+.flag-container--corner {
+  display: block;
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 50;
+  opacity: 0.45;
+  transition: opacity 0.3s;
   animation: floaty 5s ease-in-out infinite;
 }
 
+.flag-container--corner:hover {
+  opacity: 0.9;
+}
+
 .flag-svg {
-  width: clamp(240px, 34vw, 320px);
+  width: 100px;
   height: auto;
   display: block;
-  filter: drop-shadow(0 12px 36px rgba(0, 0, 0, .65));
+  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, .65));
 }
 
 .flag-label {
