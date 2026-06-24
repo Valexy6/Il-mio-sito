@@ -81,8 +81,8 @@
         </div>
       </div>
 
-      <!-- One Piece Jolly Roger -->
-      <div class="flag-container flag-container--corner" aria-hidden="true">
+      <!-- One Piece Jolly Roger — easter egg trigger -->
+      <div class="flag-container flag-container--corner flag-trigger" id="flag-trigger" role="button" tabindex="0" aria-label="..." title="">
         <svg class="flag-svg" viewBox="0 0 300 230" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="pole-grad" x1="0" y1="0" x2="1" y2="0">
@@ -533,9 +533,74 @@
   </section>
 
 
+  <!-- ════════════════════════════════
+       EASTER EGG MODAL
+  ════════════════════════════════ -->
+  <div id="secret-modal" class="secret-modal" role="dialog" aria-modal="true" aria-label="Progetto segreto" hidden>
+    <div class="secret-modal__backdrop"></div>
+    <div class="secret-modal__box">
+      <button class="secret-modal__close" id="secret-close" aria-label="Chiudi">✕</button>
+
+      <p class="secret-modal__eyebrow">// PROGETTO SEGRETO</p>
+      <h2 class="secret-modal__title">Track<br><span>My Gains</span></h2>
+      <p class="secret-modal__desc">
+        Un'app per monitorare i tuoi allenamenti e tenere traccia delle performance nel tempo.
+        Pesi, serie, ripetizioni — tutto in un posto, con grafici che ti mostrano davvero quanto stai migliorando.
+      </p>
+
+      <div class="secret-modal__status">
+        <span class="secret-modal__status-dot"></span>
+        <span>In sviluppo attivo</span>
+      </div>
+
+      <div class="secret-modal__progress">
+        <div class="secret-modal__progress-bar" style="width: 35%"></div>
+      </div>
+      <p class="secret-modal__progress-label">35% completato</p>
+
+      <a
+        class="btn btn--primary secret-modal__cta"
+        href="https://www.paypal.com/donate?business=valerioxy6%40gmail.com&currency_code=EUR"
+        target="_blank"
+        rel="noopener"
+      >Supporta il progetto →</a>
+
+      <p class="secret-modal__note">Ogni donazione va direttamente al server che regge l'app mentre la costruisco.</p>
+    </div>
+  </div>
+
   <script src="js/reveal.js"></script>
   <script src="js/form.js"></script>
   <script>
+    // Easter egg — flag trigger
+    (function () {
+      var trigger = document.getElementById('flag-trigger');
+      var modal   = document.getElementById('secret-modal');
+      var close   = document.getElementById('secret-close');
+      var backdrop = modal.querySelector('.secret-modal__backdrop');
+
+      function openModal() {
+        modal.hidden = false;
+        document.body.style.overflow = 'hidden';
+        close.focus();
+      }
+      function closeModal() {
+        modal.hidden = true;
+        document.body.style.overflow = '';
+        trigger.focus();
+      }
+
+      trigger.addEventListener('click', openModal);
+      trigger.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(); }
+      });
+      close.addEventListener('click', closeModal);
+      backdrop.addEventListener('click', closeModal);
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && !modal.hidden) closeModal();
+      });
+    })();
+
     var toggle = document.getElementById('nav-toggle');
     var nav    = document.getElementById('main-nav');
     toggle.addEventListener('click', function () {
