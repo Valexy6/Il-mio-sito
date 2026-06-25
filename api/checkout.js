@@ -30,6 +30,7 @@ module.exports = async (req, res) => {
       payment_method_types: ['card'],
       line_items,
       mode: 'payment',
+      phone_number_collection: { enabled: true },
       shipping_address_collection: {
         allowed_countries: ['IT', 'DE', 'FR', 'ES', 'PT', 'AT', 'BE', 'NL', 'CH', 'GB', 'SE', 'DK', 'PL'],
       },
