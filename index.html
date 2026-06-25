@@ -107,7 +107,7 @@
       <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;">
         <p style="font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;color:var(--text-faint);text-transform:uppercase;">// stampa_3d_simulator.exe</p>
         <canvas id="stack-game" width="220" height="300" style="border:2px solid var(--border);display:block;background:#0d0d0d;cursor:pointer;" tabindex="0"></canvas>
-        <p id="stack-hint" style="font-family:var(--font-mono);font-size:11px;color:var(--text-faint);">click o spazio per depositare il layer</p>
+        <p id="stack-hint" style="font-family:var(--font-mono);font-size:11px;color:var(--text-faint);">click o spazio per saltare — doppio salto disponibile</p>
       </div>
 
       <!-- One Piece Jolly Roger — easter egg trigger -->
@@ -721,126 +721,192 @@
 
   <script>
   (function(){
-    var canvas  = document.getElementById('stack-game');
-    var ctx     = canvas.getContext('2d');
+    var canvas = document.getElementById('stack-game');
+    var ctx    = canvas.getContext('2d');
     var W = canvas.width, H = canvas.height;
-    var BLOCK_H = 18, SPEED_START = 1.8, MAX_SPEED = 5;
-    var orange  = '#fb923c', teal = '#2dd4bf', dim = '#374151';
-    var state, layers, current, score, speed, dir;
+    var GROUND = H - 44;
+    var orange = '#fb923c', teal = '#2dd4bf';
 
-    function reset() {
-      layers  = [{ x: 30, w: 160 }];
-      score   = 0;
-      speed   = SPEED_START;
-      dir     = 1;
-      state   = 'playing';
-      current = { x: 0, w: 160 };
-      document.getElementById('stack-hint').textContent = 'click o spazio per depositare il layer';
-      loop();
+    var player, obstacles, score, speed, state, frameCount, lastSpawn, stars;
+
+    function init() {
+      player    = { x:38, y:GROUND-34, w:18, h:34, vy:0, grounded:true, jumps:0 };
+      obstacles = [];
+      score     = 0;
+      speed     = 2.8;
+      frameCount= 0;
+      lastSpawn = 0;
+      state     = 'idle';
+      stars     = [];
+      for (var i=0;i<45;i++) stars.push({x:Math.random()*W, y:Math.random()*(GROUND-20), r:Math.random()*1.2+0.3});
     }
 
-    function drop() {
-      if (state === 'gameover') { reset(); return; }
-      var top   = layers[layers.length - 1];
-      var left  = Math.max(current.x, top.x);
-      var right = Math.min(current.x + current.w, top.x + top.w);
-      var newW  = right - left;
-      if (newW <= 0) { state = 'gameover'; return; }
-      layers.push({ x: left, w: newW });
-      score++;
-      speed = Math.min(SPEED_START + score * 0.12, MAX_SPEED);
-      current = { x: 0, w: newW };
-      if (layers.length > 14) layers.shift();
+    function jump() {
+      if (state==='idle'||state==='gameover') { state='playing'; obstacles=[]; score=0; speed=2.8; frameCount=0; lastSpawn=0; player.y=GROUND-player.h; player.vy=0; player.grounded=true; player.jumps=0; return; }
+      if (player.jumps < 2) { player.vy = -11; player.jumps++; player.grounded=false; }
+    }
+
+    function spawnObstacle() {
+      var types=['coffee','clock','cat'];
+      var t=types[Math.floor(Math.random()*types.length)];
+      var dims={coffee:{w:20,h:30},clock:{w:24,h:28},cat:{w:28,h:26}};
+      var d=dims[t];
+      obstacles.push({x:W+10, y:GROUND-d.h, w:d.w, h:d.h, type:t});
+    }
+
+    function drawPlayer(f) {
+      var p=player;
+      var legSwing = p.grounded ? Math.sin(f*0.28)*6 : 0;
+      // legs
+      ctx.fillStyle=orange;
+      ctx.fillRect(p.x+2,  p.y+p.h-10, 6, 10+legSwing);
+      ctx.fillRect(p.x+10, p.y+p.h-10, 6, 10-legSwing);
+      // body
+      ctx.fillRect(p.x, p.y+10, p.w, p.h-18);
+      // head
+      ctx.beginPath(); ctx.arc(p.x+p.w/2, p.y+9, 9, 0, Math.PI*2); ctx.fill();
+      // eyes — stanco
+      ctx.fillStyle='#0d0d0d';
+      ctx.fillRect(p.x+3, p.y+6, 4, 2);
+      ctx.fillRect(p.x+11, p.y+6, 4, 2);
+      // dark circles
+      ctx.fillStyle='rgba(0,0,0,0.35)';
+      ctx.fillRect(p.x+3, p.y+8, 4, 2);
+      ctx.fillRect(p.x+11, p.y+8, 4, 2);
+    }
+
+    function drawObs(ob, f) {
+      if (ob.type==='coffee') {
+        // saucer
+        ctx.fillStyle=teal; ctx.fillRect(ob.x-1,ob.y+ob.h-4,ob.w+2,5);
+        // cup
+        ctx.fillRect(ob.x+3,ob.y+8,ob.w-6,ob.h-12);
+        // handle
+        ctx.strokeStyle=teal; ctx.lineWidth=2; ctx.beginPath();
+        ctx.arc(ob.x+ob.w-3,ob.y+ob.h-16,5,-Math.PI/2,Math.PI/2); ctx.stroke();
+        // steam
+        ctx.strokeStyle='rgba(156,163,175,0.6)'; ctx.lineWidth=1.5;
+        var sw=Math.sin(f*0.07)*2;
+        [6,13].forEach(function(sx){
+          ctx.beginPath(); ctx.moveTo(ob.x+sx,ob.y+4);
+          ctx.quadraticCurveTo(ob.x+sx+sw,ob.y-3,ob.x+sx-1,ob.y-7); ctx.stroke();
+        });
+      } else if (ob.type==='clock') {
+        ctx.fillStyle='#f59e0b';
+        // bells
+        ctx.beginPath(); ctx.arc(ob.x+4,ob.y+3,4,0,Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.arc(ob.x+ob.w-4,ob.y+3,4,0,Math.PI*2); ctx.fill();
+        // body
+        ctx.beginPath(); ctx.arc(ob.x+ob.w/2,ob.y+ob.h/2+2,ob.w/2-1,0,Math.PI*2); ctx.fill();
+        // face
+        ctx.fillStyle='#111'; ctx.beginPath(); ctx.arc(ob.x+ob.w/2,ob.y+ob.h/2+2,ob.w/2-4,0,Math.PI*2); ctx.fill();
+        // hands
+        ctx.strokeStyle='#f59e0b'; ctx.lineWidth=2;
+        ctx.beginPath(); ctx.moveTo(ob.x+ob.w/2,ob.y+ob.h/2+2); ctx.lineTo(ob.x+ob.w/2,ob.y+ob.h/2-6); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(ob.x+ob.w/2,ob.y+ob.h/2+2); ctx.lineTo(ob.x+ob.w/2+5,ob.y+ob.h/2+5); ctx.stroke();
+      } else {
+        // cat
+        ctx.fillStyle='#6b7280';
+        // body
+        ctx.fillRect(ob.x+4,ob.y+13,ob.w-8,ob.h-13);
+        // head
+        ctx.beginPath(); ctx.arc(ob.x+ob.w/2,ob.y+11,10,0,Math.PI*2); ctx.fill();
+        // ears
+        [[4,4,10,-3,14,4],[ob.w-4,4,ob.w-10,-3,ob.w-14,4]].forEach(function(e){
+          ctx.beginPath(); ctx.moveTo(ob.x+e[0],ob.y+e[1]); ctx.lineTo(ob.x+e[2],ob.y+e[3]); ctx.lineTo(ob.x+e[4],ob.y+e[5]); ctx.closePath(); ctx.fill();
+        });
+        // eyes
+        ctx.fillStyle=teal;
+        ctx.beginPath(); ctx.arc(ob.x+ob.w/2-4,ob.y+10,2.5,0,Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.arc(ob.x+ob.w/2+4,ob.y+10,2.5,0,Math.PI*2); ctx.fill();
+        // tail
+        ctx.strokeStyle='#6b7280'; ctx.lineWidth=3; ctx.lineCap='round';
+        var tw=Math.sin(f*0.09)*10;
+        ctx.beginPath(); ctx.moveTo(ob.x,ob.y+ob.h-2);
+        ctx.quadraticCurveTo(ob.x-12,ob.y+ob.h-8+tw,ob.x-10,ob.y+ob.h-20+tw); ctx.stroke();
+      }
     }
 
     function draw() {
-      ctx.clearRect(0, 0, W, H);
-      // base platform label
-      ctx.fillStyle = dim;
-      ctx.font = '9px monospace';
-      ctx.fillText('BASE PLATE', 30, H - 4);
-
-      // draw stacked layers
-      var totalLayers = layers.length;
-      layers.forEach(function(l, i) {
-        var y = H - 28 - i * (BLOCK_H + 2);
-        var progress = i / 14;
-        ctx.fillStyle = i === 0 ? '#1f2937' : (i % 2 === 0 ? orange : teal);
-        ctx.globalAlpha = 0.5 + progress * 0.5;
-        ctx.fillRect(l.x, y, l.w, BLOCK_H);
-        ctx.globalAlpha = 1;
-        // layer line detail
-        ctx.fillStyle = 'rgba(255,255,255,0.06)';
-        for (var row = 3; row < BLOCK_H; row += 4) {
-          ctx.fillRect(l.x + 2, y + row, l.w - 4, 1);
-        }
+      ctx.clearRect(0,0,W,H);
+      // sky
+      ctx.fillStyle='#0a0a0f'; ctx.fillRect(0,0,W,H);
+      // stars
+      stars.forEach(function(s){
+        var tw=0.3+0.7*Math.abs(Math.sin(frameCount*0.018+s.x*0.1));
+        ctx.fillStyle='rgba(255,255,255,'+tw+')';
+        ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fill();
       });
+      // moon
+      ctx.fillStyle='#fef3c7'; ctx.beginPath(); ctx.arc(W-28,28,14,0,Math.PI*2); ctx.fill();
+      ctx.fillStyle='#0a0a0f'; ctx.beginPath(); ctx.arc(W-20,24,11,0,Math.PI*2); ctx.fill();
+      // ground
+      ctx.fillStyle='#1f2937'; ctx.fillRect(0,GROUND,W,H-GROUND);
+      ctx.fillStyle=teal; ctx.fillRect(0,GROUND,W,2);
+      // scrolling grid
+      ctx.fillStyle='rgba(45,212,191,0.07)';
+      var gx=-(frameCount*speed%40);
+      for(;gx<W;gx+=40) ctx.fillRect(gx,GROUND,1,H-GROUND);
 
-      // draw moving block
-      if (state === 'playing') {
-        var topLayer = layers[layers.length - 1];
-        var movY = H - 28 - layers.length * (BLOCK_H + 2);
-        ctx.fillStyle = orange;
-        ctx.globalAlpha = 0.9;
-        ctx.fillRect(current.x, movY, current.w, BLOCK_H);
-        ctx.globalAlpha = 1;
-        // glow effect
-        ctx.shadowColor = orange;
-        ctx.shadowBlur  = 8;
-        ctx.fillRect(current.x, movY, current.w, 2);
-        ctx.shadowBlur  = 0;
+      if (state==='idle') {
+        ctx.textAlign='center';
+        ctx.fillStyle=orange; ctx.font='bold 13px monospace'; ctx.fillText('INSONNIA RUNNER',W/2,H/2-18);
+        ctx.fillStyle='#9ca3af'; ctx.font='10px monospace'; ctx.fillText('click o spazio per iniziare',W/2,H/2+4);
+        ctx.textAlign='left'; return;
       }
+
+      obstacles.forEach(function(ob){drawObs(ob,frameCount);});
+      drawPlayer(frameCount);
 
       // score
-      ctx.fillStyle = '#9ca3af';
-      ctx.font = 'bold 11px monospace';
-      ctx.fillText('LAYER: ' + score, 8, 18);
+      ctx.fillStyle='#9ca3af'; ctx.font='bold 10px monospace';
+      ctx.fillText('ORE INSONNIA: '+score,8,16);
 
-      // game over
-      if (state === 'gameover') {
-        ctx.fillStyle = 'rgba(0,0,0,0.75)';
-        ctx.fillRect(0, 0, W, H);
-        ctx.fillStyle = orange;
-        ctx.font = 'bold 16px monospace';
-        ctx.textAlign = 'center';
-        ctx.fillText('PRINT FAILED', W/2, H/2 - 24);
-        ctx.fillStyle = '#9ca3af';
-        ctx.font = '11px monospace';
-        ctx.fillText('layers: ' + score, W/2, H/2);
-        ctx.fillStyle = teal;
-        ctx.font = '11px monospace';
-        ctx.fillText('[ click per riprovare ]', W/2, H/2 + 22);
-        ctx.textAlign = 'left';
-        document.getElementById('stack-hint').textContent = 'PRINT FAILED — ' + score + ' layer' + (score !== 1 ? 's' : '');
+      if (state==='gameover') {
+        ctx.fillStyle='rgba(0,0,0,0.82)'; ctx.fillRect(0,0,W,H);
+        ctx.textAlign='center';
+        ctx.fillStyle=orange; ctx.font='bold 13px monospace'; ctx.fillText('FINALMENTE DORMITO',W/2,H/2-26);
+        ctx.fillStyle='#9ca3af'; ctx.font='10px monospace';
+        ctx.fillText('ore di insonnia: '+score,W/2,H/2-6);
+        ctx.fillStyle=teal; ctx.fillText('[ click per riprovare ]',W/2,H/2+16);
+        ctx.textAlign='left';
       }
     }
 
-    var animId;
-    function loop() {
-      if (animId) cancelAnimationFrame(animId);
-      function tick() {
-        if (state === 'playing') {
-          current.x += speed * dir;
-          var top = layers[layers.length - 1];
-          if (current.x + current.w > W - 10) dir = -1;
-          if (current.x < 10) dir = 1;
-        }
-        draw();
-        if (state !== 'gameover') animId = requestAnimationFrame(tick);
-        else draw();
+    function tick() {
+      frameCount++;
+      if (state==='playing') {
+        // physics
+        player.vy += 0.58;
+        player.y  += player.vy;
+        if (player.y >= GROUND-player.h) {
+          player.y=GROUND-player.h; player.vy=0; player.grounded=true; player.jumps=0;
+        } else { player.grounded=false; }
+        // obstacles
+        obstacles.forEach(function(ob){ob.x-=speed;});
+        obstacles=obstacles.filter(function(ob){return ob.x+ob.w>-20;});
+        var minGap=Math.max(55,120-score);
+        if (frameCount-lastSpawn>minGap){spawnObstacle();lastSpawn=frameCount;}
+        // score & speed
+        if(frameCount%7===0) score++;
+        speed=Math.min(2.8+score*0.018,8);
+        // collision
+        obstacles.forEach(function(ob){
+          if(player.x+player.w-5>ob.x+4 && player.x+5<ob.x+ob.w-4 &&
+             player.y+8<ob.y+ob.h && player.y+player.h>ob.y+4) state='gameover';
+        });
       }
-      tick();
+      draw();
+      requestAnimationFrame(tick);
     }
 
-    canvas.addEventListener('click', drop);
-    document.addEventListener('keydown', function(e) {
-      if (e.code === 'Space' && document.activeElement === canvas) { e.preventDefault(); drop(); }
-    });
-    canvas.addEventListener('keydown', function(e) {
-      if (e.code === 'Space') { e.preventDefault(); drop(); }
+    canvas.addEventListener('click', jump);
+    document.addEventListener('keydown', function(e){
+      if(e.code==='Space'){e.preventDefault();jump();}
     });
 
-    reset();
+    init();
+    tick();
   })();
   </script>
   <script src="js/reveal.js"></script>
