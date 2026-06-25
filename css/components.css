@@ -1356,6 +1356,112 @@
   color: var(--text);
 }
 
+/* ── Shirt options (taglia / colore / genere nelle card) ── */
+.shirt-options {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.shirt-opt-group {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.opt-btn {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: border-color .15s, color .15s, background .15s;
+}
+
+.opt-btn.active,
+.opt-btn--size.active,
+.opt-btn--gender.active {
+  border-color: var(--teal);
+  color: var(--teal);
+  background: rgba(45,212,191,.08);
+}
+
+.opt-btn--color.active {
+  border-color: var(--orange);
+  color: var(--orange);
+  background: rgba(251,146,60,.08);
+}
+
+/* ── Modal personalizzazione ── */
+.custom-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.75);
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s;
+}
+.custom-modal-overlay.is-open { opacity: 1; pointer-events: auto; }
+
+.custom-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -56%);
+  width: min(560px, 95vw);
+  max-height: 90vh;
+  overflow-y: auto;
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  z-index: 1001;
+  padding: clamp(24px, 4vw, 40px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s, transform .3s cubic-bezier(.22,1,.36,1);
+}
+.custom-modal.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%);
+}
+
+.custom-modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.custom-modal__title {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 22px;
+  margin: 0;
+}
+
+.custom-modal__close {
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: var(--text-dim);
+  cursor: pointer;
+  line-height: 1;
+  transition: color .15s;
+}
+.custom-modal__close:hover { color: var(--orange); }
+
+.custom-modal__form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
 /* ── Buy button (product cards) ── */
 .buy-btn {
   font-family: var(--font-mono);

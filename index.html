@@ -349,6 +349,18 @@
           </div>
         </article>
 
+        <article class="product-card product-card--print reveal">
+          <div class="product-card__image product-card__image--print" style="display:flex;align-items:center;justify-content:center;font-size:56px;">🖨️</div>
+          <div class="product-card__body">
+            <h4 class="product-card__name">Personalizza la tua statuetta</h4>
+            <p class="product-card__desc">Mandami una foto, stampo quello che vuoi</p>
+            <div class="product-card__footer">
+              <span class="product-card__price product-card__price--orange">Su preventivo</span>
+              <button class="buy-btn" onclick="openCustomModal('statuetta')">Personalizza →</button>
+            </div>
+          </div>
+        </article>
+
       </div>
 
       <!-- ── T-Shirts ── -->
@@ -368,9 +380,25 @@
           <div class="product-card__body">
             <h4 class="product-card__name">Il volto del Nord</h4>
             <p class="product-card__desc">Compra ed indossa a tuo rischio e pericolo</p>
+            <div class="shirt-options">
+              <div class="shirt-opt-group">
+                <button type="button" class="opt-btn opt-btn--color active" data-val="Bianco" onclick="selectOpt(this)">Bianco</button>
+                <button type="button" class="opt-btn opt-btn--color" data-val="Nero" onclick="selectOpt(this)">Nero</button>
+              </div>
+              <div class="shirt-opt-group">
+                <button type="button" class="opt-btn opt-btn--size" data-val="S" onclick="selectOpt(this)">S</button>
+                <button type="button" class="opt-btn opt-btn--size active" data-val="M" onclick="selectOpt(this)">M</button>
+                <button type="button" class="opt-btn opt-btn--size" data-val="L" onclick="selectOpt(this)">L</button>
+                <button type="button" class="opt-btn opt-btn--size" data-val="XL" onclick="selectOpt(this)">XL</button>
+              </div>
+              <div class="shirt-opt-group">
+                <button type="button" class="opt-btn opt-btn--gender active" data-val="Uomo" onclick="selectOpt(this)">Uomo</button>
+                <button type="button" class="opt-btn opt-btn--gender" data-val="Donna" onclick="selectOpt(this)">Donna</button>
+              </div>
+            </div>
             <div class="product-card__footer">
               <span class="product-card__price product-card__price--teal">€19</span>
-              <button class="buy-btn" onclick="CartVB.add('layer-lines','Il volto del Nord',1900)">Aggiungi al carrello</button>
+              <button class="buy-btn" onclick="addShirtToCart(this,'layer-lines','Il volto del Nord',1900)">Aggiungi al carrello</button>
             </div>
           </div>
         </article>
@@ -383,9 +411,25 @@
           <div class="product-card__body">
             <h4 class="product-card__name">Fisico non mi tradire</h4>
             <p class="product-card__desc">Per chi vive gli allenamenti tra il rischio di un infortunio e l'altro</p>
+            <div class="shirt-options">
+              <div class="shirt-opt-group">
+                <button type="button" class="opt-btn opt-btn--color active" data-val="Bianco" onclick="selectOpt(this)">Bianco</button>
+                <button type="button" class="opt-btn opt-btn--color" data-val="Nero" onclick="selectOpt(this)">Nero</button>
+              </div>
+              <div class="shirt-opt-group">
+                <button type="button" class="opt-btn opt-btn--size" data-val="S" onclick="selectOpt(this)">S</button>
+                <button type="button" class="opt-btn opt-btn--size active" data-val="M" onclick="selectOpt(this)">M</button>
+                <button type="button" class="opt-btn opt-btn--size" data-val="L" onclick="selectOpt(this)">L</button>
+                <button type="button" class="opt-btn opt-btn--size" data-val="XL" onclick="selectOpt(this)">XL</button>
+              </div>
+              <div class="shirt-opt-group">
+                <button type="button" class="opt-btn opt-btn--gender active" data-val="Uomo" onclick="selectOpt(this)">Uomo</button>
+                <button type="button" class="opt-btn opt-btn--gender" data-val="Donna" onclick="selectOpt(this)">Donna</button>
+              </div>
+            </div>
             <div class="product-card__footer">
               <span class="product-card__price product-card__price--teal">€25</span>
-              <button class="buy-btn" onclick="CartVB.add('404-not-found','Fisico non mi tradire',2500)">Aggiungi al carrello</button>
+              <button class="buy-btn" onclick="addShirtToCart(this,'404-not-found','Fisico non mi tradire',2500)">Aggiungi al carrello</button>
             </div>
           </div>
         </article>
@@ -398,9 +442,37 @@
           <div class="product-card__body">
             <h4 class="product-card__name">?</h4>
             <p class="product-card__desc">?</p>
+            <div class="shirt-options">
+              <div class="shirt-opt-group">
+                <button type="button" class="opt-btn opt-btn--color active" data-val="Bianco" onclick="selectOpt(this)">Bianco</button>
+                <button type="button" class="opt-btn opt-btn--color" data-val="Nero" onclick="selectOpt(this)">Nero</button>
+              </div>
+              <div class="shirt-opt-group">
+                <button type="button" class="opt-btn opt-btn--size" data-val="S" onclick="selectOpt(this)">S</button>
+                <button type="button" class="opt-btn opt-btn--size active" data-val="M" onclick="selectOpt(this)">M</button>
+                <button type="button" class="opt-btn opt-btn--size" data-val="L" onclick="selectOpt(this)">L</button>
+                <button type="button" class="opt-btn opt-btn--size" data-val="XL" onclick="selectOpt(this)">XL</button>
+              </div>
+              <div class="shirt-opt-group">
+                <button type="button" class="opt-btn opt-btn--gender active" data-val="Uomo" onclick="selectOpt(this)">Uomo</button>
+                <button type="button" class="opt-btn opt-btn--gender" data-val="Donna" onclick="selectOpt(this)">Donna</button>
+              </div>
+            </div>
             <div class="product-card__footer">
               <span class="product-card__price product-card__price--teal">€30</span>
-              <button class="buy-btn" onclick="CartVB.add('estrusione','Estrusione',3000)">Aggiungi al carrello</button>
+              <button class="buy-btn" onclick="addShirtToCart(this,'estrusione','Estrusione',3000)">Aggiungi al carrello</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card product-card--shirt reveal">
+          <div class="product-card__image product-card__image--shirt" style="display:flex;align-items:center;justify-content:center;font-size:56px;">👕</div>
+          <div class="product-card__body">
+            <h4 class="product-card__name">Personalizza la tua t-shirt</h4>
+            <p class="product-card__desc">Il tuo design, i tuoi colori, la tua taglia</p>
+            <div class="product-card__footer">
+              <span class="product-card__price product-card__price--teal">Su preventivo</span>
+              <button class="buy-btn" onclick="openCustomModal('tshirt')">Personalizza →</button>
             </div>
           </div>
         </article>
@@ -413,9 +485,25 @@
           <div class="product-card__body">
             <h4 class="product-card__name">?</h4>
             <p class="product-card__desc">?</p>
+            <div class="shirt-options">
+              <div class="shirt-opt-group">
+                <button type="button" class="opt-btn opt-btn--color active" data-val="Bianco" onclick="selectOpt(this)">Bianco</button>
+                <button type="button" class="opt-btn opt-btn--color" data-val="Nero" onclick="selectOpt(this)">Nero</button>
+              </div>
+              <div class="shirt-opt-group">
+                <button type="button" class="opt-btn opt-btn--size" data-val="S" onclick="selectOpt(this)">S</button>
+                <button type="button" class="opt-btn opt-btn--size active" data-val="M" onclick="selectOpt(this)">M</button>
+                <button type="button" class="opt-btn opt-btn--size" data-val="L" onclick="selectOpt(this)">L</button>
+                <button type="button" class="opt-btn opt-btn--size" data-val="XL" onclick="selectOpt(this)">XL</button>
+              </div>
+              <div class="shirt-opt-group">
+                <button type="button" class="opt-btn opt-btn--gender active" data-val="Uomo" onclick="selectOpt(this)">Uomo</button>
+                <button type="button" class="opt-btn opt-btn--gender" data-val="Donna" onclick="selectOpt(this)">Donna</button>
+              </div>
+            </div>
             <div class="product-card__footer">
               <span class="product-card__price product-card__price--teal">€28</span>
-              <button class="buy-btn" onclick="CartVB.add('glitch','Glitch',2800)">Aggiungi al carrello</button>
+              <button class="buy-btn" onclick="addShirtToCart(this,'glitch','Glitch',2800)">Aggiungi al carrello</button>
             </div>
           </div>
         </article>
@@ -601,9 +689,139 @@
     </div>
   </div>
 
+  <!-- ── Modal personalizzazione ── -->
+  <div id="custom-modal-overlay" class="custom-modal-overlay" onclick="closeCustomModal()"></div>
+  <div id="custom-modal" class="custom-modal" role="dialog" aria-modal="true">
+    <div class="custom-modal__header">
+      <h3 id="custom-modal-title" class="custom-modal__title"></h3>
+      <button class="custom-modal__close" onclick="closeCustomModal()">×</button>
+    </div>
+    <form id="custom-modal-form" class="custom-modal__form">
+      <input type="hidden" name="Tipo ordine" id="modal-tipo">
+      <div class="form__field">
+        <label class="form__label">Nome *</label>
+        <input type="text" name="Nome" class="form__input" required>
+      </div>
+      <div class="form__field">
+        <label class="form__label">Email *</label>
+        <input type="email" name="Email" class="form__input" required>
+      </div>
+      <div id="modal-shirt-fields" style="display:none;flex-direction:column;gap:16px;">
+        <div class="form__field">
+          <label class="form__label">Colore</label>
+          <div class="shirt-opt-group">
+            <button type="button" class="opt-btn opt-btn--color active" data-val="Bianco" onclick="selectModalOpt(this,'modal-colore')">Bianco</button>
+            <button type="button" class="opt-btn opt-btn--color" data-val="Nero" onclick="selectModalOpt(this,'modal-colore')">Nero</button>
+          </div>
+          <input type="hidden" name="Colore" id="modal-colore" value="Bianco">
+        </div>
+        <div class="form__field">
+          <label class="form__label">Taglia</label>
+          <div class="shirt-opt-group">
+            <button type="button" class="opt-btn opt-btn--size" data-val="S" onclick="selectModalOpt(this,'modal-taglia')">S</button>
+            <button type="button" class="opt-btn opt-btn--size active" data-val="M" onclick="selectModalOpt(this,'modal-taglia')">M</button>
+            <button type="button" class="opt-btn opt-btn--size" data-val="L" onclick="selectModalOpt(this,'modal-taglia')">L</button>
+            <button type="button" class="opt-btn opt-btn--size" data-val="XL" onclick="selectModalOpt(this,'modal-taglia')">XL</button>
+          </div>
+          <input type="hidden" name="Taglia" id="modal-taglia" value="M">
+        </div>
+        <div class="form__field">
+          <label class="form__label">Genere</label>
+          <div class="shirt-opt-group">
+            <button type="button" class="opt-btn opt-btn--gender active" data-val="Uomo" onclick="selectModalOpt(this,'modal-genere')">Uomo</button>
+            <button type="button" class="opt-btn opt-btn--gender" data-val="Donna" onclick="selectModalOpt(this,'modal-genere')">Donna</button>
+          </div>
+          <input type="hidden" name="Genere" id="modal-genere" value="Uomo">
+        </div>
+      </div>
+      <div class="form__field">
+        <label class="form__label">Descrizione *</label>
+        <textarea name="Descrizione" class="form__textarea" rows="4" required placeholder="Descrivi cosa vuoi..."></textarea>
+      </div>
+      <div class="form__field" id="modal-file-field">
+        <label class="form__label">Allega foto <span style="color:var(--text-faint);font-weight:400">(facoltativo)</span></label>
+        <input type="file" name="Allegato" class="form__input" accept="image/*,.pdf" style="padding:10px">
+      </div>
+      <button type="submit" class="btn btn--primary" style="width:100%">Invia richiesta →</button>
+      <p id="modal-success" style="display:none;text-align:center;color:var(--teal);font-family:var(--font-mono);font-size:13px;margin-top:12px;">✓ Richiesta inviata! Ti rispondo presto.</p>
+      <p id="modal-error" style="display:none;text-align:center;color:#f87171;font-family:var(--font-mono);font-size:13px;margin-top:12px;">Errore nell'invio. Riprova.</p>
+    </form>
+  </div>
+
   <script src="js/reveal.js"></script>
   <script src="js/form.js"></script>
   <script src="js/cart.js"></script>
+  <script>
+    function openCustomModal(type) {
+      var title = document.getElementById('custom-modal-title');
+      var shirtFields = document.getElementById('modal-shirt-fields');
+      document.getElementById('modal-tipo').value = type === 'tshirt' ? 'Personalizzazione T-shirt' : 'Personalizzazione Statuetta';
+      title.textContent = type === 'tshirt' ? 'Personalizza T-shirt' : 'Personalizza Statuetta';
+      shirtFields.style.display = type === 'tshirt' ? 'flex' : 'none';
+      document.getElementById('custom-modal').classList.add('is-open');
+      document.getElementById('custom-modal-overlay').classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCustomModal() {
+      document.getElementById('custom-modal').classList.remove('is-open');
+      document.getElementById('custom-modal-overlay').classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    function selectOpt(btn) {
+      btn.parentElement.querySelectorAll('.opt-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+    }
+
+    function selectModalOpt(btn, hiddenId) {
+      selectOpt(btn);
+      document.getElementById(hiddenId).value = btn.dataset.val;
+    }
+
+    function addShirtToCart(btn, id, name, price) {
+      var card = btn.closest('.product-card');
+      var color  = card.querySelector('.opt-btn--color.active');
+      var size   = card.querySelector('.opt-btn--size.active');
+      var gender = card.querySelector('.opt-btn--gender.active');
+      var parts  = [name];
+      if (gender) parts.push(gender.dataset.val);
+      if (size)   parts.push(size.dataset.val);
+      if (color)  parts.push(color.dataset.val);
+      CartVB.add(id, parts.join(' — '), price);
+    }
+
+    document.getElementById('custom-modal-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var form = this;
+      var btn = form.querySelector('[type="submit"]');
+      var successEl = document.getElementById('modal-success');
+      var errorEl   = document.getElementById('modal-error');
+      btn.disabled = true;
+      btn.textContent = 'Invio in corso…';
+      fetch('https://formspree.io/f/xzdlzyjb', {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(d) {
+        if (d.ok) {
+          successEl.style.display = 'block';
+          errorEl.style.display   = 'none';
+          form.reset();
+          btn.textContent = 'Invia richiesta →';
+          btn.disabled = false;
+          setTimeout(closeCustomModal, 2500);
+        } else { throw new Error(); }
+      })
+      .catch(function() {
+        errorEl.style.display = 'block';
+        btn.textContent = 'Invia richiesta →';
+        btn.disabled = false;
+      });
+    });
+  </script>
   <script>
     // Easter egg — flag trigger
     (function () {
