@@ -80,7 +80,7 @@
           Vai — tanto cosa puoi perdere? →
         </button>
 
-        <p class="buio-card__note">Cliccando sarai contattato via email per la spedizione.</p>
+        <p class="buio-card__note">Cliccando verrai reindirizzato al pagamento sicuro con Stripe.</p>
 
       </div>
 
@@ -104,9 +104,32 @@
     document.getElementById('qty-plus').addEventListener('click',  () => { qty++; update(); });
 
     document.getElementById('buy-buio').addEventListener('click', () => {
-      const totale = qty * 10;
-      const msg = encodeURIComponent(`Ciao Valerio! Voglio fare un ordine al buio: ${qty} pezzo${qty > 1 ? 'i' : ''} — Totale €${totale}`);
-      window.open(`https://wa.me/393273818658?text=${msg}`, '_blank');
+      const btn = document.getElementById('buy-buio');
+      btn.disabled = true;
+      btn.textContent = 'Caricamento…';
+
+      fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          items: [{ name: 'Ordine al buio', unitPrice: 1000, quantity: qty }]
+        })
+      })
+      .then(r => r.json())
+      .then(data => {
+        if (data.url) {
+          window.location.href = data.url;
+        } else {
+          btn.disabled = false;
+          btn.textContent = 'Vai — tanto cosa puoi perdere? →';
+          alert('Errore nel checkout. Riprova.');
+        }
+      })
+      .catch(() => {
+        btn.disabled = false;
+        btn.textContent = 'Vai — tanto cosa puoi perdere? →';
+        alert('Errore di connessione. Riprova.');
+      });
     });
 
     update();
