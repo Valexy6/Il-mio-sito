@@ -291,7 +291,7 @@
 
         <article class="product-card product-card--print reveal">
           <div class="product-card__image product-card__image--print">
-            <img src="assets/images/barca-vela.png" alt="Barca a vela" style="width:100%;height:100%;object-fit:cover;display:block;">
+            <img src="assets/images/barca-vela.png" alt="Barca a vela" style="width:100%;height:100%;object-fit:cover;display:block;cursor:zoom-in;" onclick="openLightbox(this.src,this.alt)">
             <span class="product-card__badge product-card__badge--orange">Ed. limitata</span>
           </div>
           <div class="product-card__body">
@@ -306,7 +306,7 @@
 
         <article class="product-card product-card--print reveal">
           <div class="product-card__image product-card__image--print">
-            <img src="assets/images/busto-cuore.png" alt="Busto a cuore aperto" style="width:100%;height:100%;object-fit:cover;display:block;">
+            <img src="assets/images/busto-cuore.png" alt="Busto a cuore aperto" style="width:100%;height:100%;object-fit:cover;display:block;cursor:zoom-in;" onclick="openLightbox(this.src,this.alt)">
             <span class="product-card__badge product-card__badge--orange">Pochi rimanenti</span>
           </div>
           <div class="product-card__body">
@@ -336,7 +336,7 @@
 
         <article class="product-card product-card--print reveal">
           <div class="product-card__image product-card__image--print">
-            <img src="assets/images/stampa-personalizzata.png" alt="Personalizza la tua statuetta" style="width:100%;height:100%;object-fit:cover;display:block;">
+            <img src="assets/images/stampa-personalizzata.png" alt="Personalizza la tua statuetta" style="width:100%;height:100%;object-fit:cover;display:block;cursor:zoom-in;" onclick="openLightbox(this.src,this.alt)">
           </div>
           <div class="product-card__body">
             <h4 class="product-card__name">Personalizza la tua statuetta</h4>
@@ -361,7 +361,7 @@
 
         <article class="product-card product-card--shirt reveal">
           <div class="product-card__image product-card__image--shirt">
-            <img src="assets/images/foto-t-shirt-NorthFace.png" alt="Il volto del Nord" style="width:100%;height:100%;object-fit:cover;display:block;">
+            <img src="assets/images/foto-t-shirt-NorthFace.png" alt="Il volto del Nord" style="width:100%;height:100%;object-fit:cover;display:block;cursor:zoom-in;" onclick="openLightbox(this.src,this.alt)">
             <span class="product-card__badge product-card__badge--teal">Ed. limitata</span>
           </div>
           <div class="product-card__body">
@@ -392,7 +392,7 @@
 
         <article class="product-card product-card--shirt reveal">
           <div class="product-card__image product-card__image--shirt">
-            <img src="assets/images/foto-t-shirt-Dragonball.png" alt="Fisico non mi tradire" style="width:100%;height:100%;object-fit:cover;display:block;">
+            <img src="assets/images/foto-t-shirt-Dragonball.png" alt="Fisico non mi tradire" style="width:100%;height:100%;object-fit:cover;display:block;cursor:zoom-in;" onclick="openLightbox(this.src,this.alt)">
             <span class="product-card__badge product-card__badge--teal">Best seller</span>
           </div>
           <div class="product-card__body">
@@ -648,6 +648,11 @@
     </div>
   </div>
 
+  <!-- ── Lightbox ── -->
+  <div id="lightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:2000;align-items:center;justify-content:center;cursor:zoom-out;" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="" style="max-width:90vw;max-height:90vh;object-fit:contain;box-shadow:0 0 60px rgba(0,0,0,.8);">
+  </div>
+
   <!-- ── Modal personalizzazione ── -->
   <div id="custom-modal-overlay" class="custom-modal-overlay" onclick="closeCustomModal()"></div>
   <div id="custom-modal" class="custom-modal" role="dialog" aria-modal="true">
@@ -737,6 +742,19 @@
       selectOpt(btn);
       document.getElementById(hiddenId).value = btn.dataset.val;
     }
+
+    function openLightbox(src, alt) {
+      var lb = document.getElementById('lightbox');
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox-img').alt = alt || '';
+      lb.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeLightbox(); });
 
     function addShirtToCart(btn, id, name, price) {
       var card = btn.closest('.product-card');
