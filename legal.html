@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Note legali — Valerio Ballaró</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <style>
+    .legal-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: clamp(48px, 8vw, 96px) var(--pad-x);
+    }
+    .legal-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 56px;
+    }
+    .legal-nav a {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: .1em;
+      color: var(--text-dim);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      transition: border-color .15s, color .15s;
+    }
+    .legal-nav a:hover { border-color: var(--orange); color: var(--orange); }
+    .legal-section { margin-bottom: 72px; }
+    .legal-section h2 {
+      font-family: var(--font-display);
+      text-transform: uppercase;
+      font-size: clamp(24px, 4vw, 36px);
+      margin: 0 0 8px;
+      color: var(--text);
+    }
+    .legal-section .legal-updated {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-faint);
+      margin: 0 0 28px;
+    }
+    .legal-section h3 {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin: 28px 0 8px;
+    }
+    .legal-section p, .legal-section li {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-dim);
+      margin: 0 0 12px;
+    }
+    .legal-section ul {
+      padding-left: 20px;
+      margin: 0 0 12px;
+    }
+    .legal-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 72px 0;
+    }
+    .legal-section a { color: var(--orange); }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="index.html" class="logo">
+        <img src="assets/images/logo.png" alt="VB logo" style="height:36px;width:auto;display:block;">
+      </a>
+    </div>
+  </header>
+
+  <main class="legal-wrap">
+
+    <p class="section-label section-label--orange" style="margin-bottom:16px;">// NOTE LEGALI</p>
+    <h1 style="font-family:var(--font-display);text-transform:uppercase;font-size:clamp(32px,6vw,56px);margin:0 0 40px;">
+      Informazioni legali
+    </h1>
+
+    <nav class="legal-nav" aria-label="Sezioni">
+      <a href="#privacy">Privacy Policy</a>
+      <a href="#cookie">Cookie Policy</a>
+      <a href="#termini">Termini e Condizioni</a>
+      <a href="#spedizioni">Spedizioni</a>
+      <a href="#resi">Resi e Rimborsi</a>
+    </nav>
+
+    <!-- ── PRIVACY POLICY ── -->
+    <section class="legal-section" id="privacy">
+      <h2>Privacy Policy</h2>
+      <p class="legal-updated">Ultimo aggiornamento: giugno 2026</p>
+
+      <p>Il presente sito è gestito da Valerio Ballaró, privato cittadino, con sede in Italia. Il trattamento dei dati personali avviene nel rispetto del Regolamento (UE) 2016/679 (GDPR).</p>
+
+      <h3>Titolare del trattamento</h3>
+      <p>Valerio Ballaró — <a href="mailto:valerioxy6@gmail.com">valerioxy6@gmail.com</a></p>
+
+      <h3>Dati raccolti e finalità</h3>
+      <ul>
+        <li><strong>Dati di contatto</strong> (nome, email, descrizione progetto): raccolti tramite il modulo ordini personalizzati, utilizzati esclusivamente per rispondere alla richiesta. Forniti volontariamente dall'utente. Base giuridica: esecuzione di misure precontrattuali (art. 6 lett. b GDPR).</li>
+        <li><strong>Dati di pagamento e spedizione</strong> (nome, indirizzo, email, eventuale numero di telefono): raccolti da Stripe, Inc. al momento dell'acquisto. Non vengono mai trasmessi a questo sito né conservati sui nostri server. Base giuridica: esecuzione del contratto (art. 6 lett. b GDPR).</li>
+        <li><strong>Dati tecnici</strong> (indirizzo IP, browser, pagine visitate): raccolti automaticamente da Vercel (hosting) per scopi di sicurezza e stabilità del servizio. Base giuridica: legittimo interesse (art. 6 lett. f GDPR).</li>
+      </ul>
+
+      <h3>Terze parti coinvolte</h3>
+      <ul>
+        <li><strong>Stripe, Inc.</strong> — elaborazione pagamenti. Privacy policy: <a href="https://stripe.com/it/privacy" target="_blank" rel="noopener">stripe.com/it/privacy</a></li>
+        <li><strong>Formspree</strong> — invio moduli di contatto. Privacy policy: <a href="https://formspree.io/legal/privacy-policy" target="_blank" rel="noopener">formspree.io/legal/privacy-policy</a></li>
+        <li><strong>Vercel, Inc.</strong> — hosting del sito. Privacy policy: <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener">vercel.com/legal/privacy-policy</a></li>
+      </ul>
+
+      <h3>Conservazione dei dati</h3>
+      <p>I dati inviati tramite il modulo di contatto vengono conservati per il tempo strettamente necessario a evadere la richiesta e, in caso di ordine, per gli obblighi di legge (max 10 anni per documentazione fiscale). I dati di pagamento sono conservati da Stripe secondo le proprie policy.</p>
+
+      <h3>Diritti dell'interessato</h3>
+      <p>Hai diritto di accesso, rettifica, cancellazione, limitazione, portabilità e opposizione al trattamento. Puoi esercitarli scrivendo a <a href="mailto:valerioxy6@gmail.com">valerioxy6@gmail.com</a>. Hai altresì il diritto di proporre reclamo al Garante per la Protezione dei Dati Personali (<a href="https://www.garanteprivacy.it" target="_blank" rel="noopener">garanteprivacy.it</a>).</p>
+    </section>
+
+    <hr class="legal-divider">
+
+    <!-- ── COOKIE POLICY ── -->
+    <section class="legal-section" id="cookie">
+      <h2>Cookie Policy</h2>
+      <p class="legal-updated">Ultimo aggiornamento: giugno 2026</p>
+
+      <p>Questo sito utilizza un numero minimo di cookie, tutti strettamente necessari al funzionamento.</p>
+
+      <h3>Cookie tecnici (necessari)</h3>
+      <ul>
+        <li><strong>vb_cart</strong> — memorizza il contenuto del carrello nel browser (localStorage). Non viene trasmesso a server esterni. Scade alla pulizia del localStorage da parte dell'utente.</li>
+      </ul>
+
+      <h3>Cookie di terze parti</h3>
+      <p>Al momento del pagamento, Stripe potrebbe impostare cookie propri per la prevenzione delle frodi e la gestione della sessione di pagamento. Per dettagli consulta la <a href="https://stripe.com/it/privacy" target="_blank" rel="noopener">Cookie Policy di Stripe</a>.</p>
+
+      <h3>Nessun cookie di profilazione o marketing</h3>
+      <p>Questo sito non utilizza Google Analytics, Meta Pixel, o altri strumenti di tracciamento a fini pubblicitari o statistici.</p>
+
+      <h3>Come gestire i cookie</h3>
+      <p>Puoi eliminare i dati di localStorage e i cookie in qualsiasi momento dalle impostazioni del tuo browser. La rimozione del cookie <em>vb_cart</em> svuoterà il carrello.</p>
+    </section>
+
+    <hr class="legal-divider">
+
+    <!-- ── TERMINI E CONDIZIONI ── -->
+    <section class="legal-section" id="termini">
+      <h2>Termini e Condizioni</h2>
+      <p class="legal-updated">Ultimo aggiornamento: giugno 2026</p>
+
+      <h3>Venditore</h3>
+      <p>Valerio Ballaró, privato cittadino, Italia. Contatto: <a href="mailto:valerioxy6@gmail.com">valerioxy6@gmail.com</a></p>
+
+      <h3>Prodotti</h3>
+      <p>Il sito propone stampe 3D artigianali, t-shirt personalizzate e ordini "al buio" (prodotto a sorpresa scelto dal venditore). I prodotti sono realizzati in piccole quantità, spesso in pezzi unici o edizioni limitate.</p>
+
+      <h3>Prezzi</h3>
+      <p>I prezzi indicati sono in Euro (€) e sono comprensivi di IVA ove applicabile. Le spese di spedizione sono indicate separatamente al momento del checkout.</p>
+
+      <h3>Ordine e pagamento</h3>
+      <p>L'ordine si perfeziona al completamento del pagamento tramite Stripe. Riceverai una email di conferma da Stripe. Il venditore si riserva il diritto di annullare ordini in caso di errori evidenti di prezzo o disponibilità, con rimborso integrale.</p>
+
+      <h3>Ordini personalizzati</h3>
+      <p>Gli ordini personalizzati (sezione "Ordini") sono gestiti tramite accordo diretto via email. Il pagamento avviene solo dopo approvazione del preventivo da parte del cliente.</p>
+
+      <h3>Ordine al buio</h3>
+      <p>L'ordine al buio prevede la ricezione di un prodotto scelto discrezionalmente dal venditore tra quelli disponibili. Il cliente accetta esplicitamente di non conoscere il prodotto in anticipo. Non si applicano le disposizioni sul diritto di recesso per i beni personalizzati (art. 59 lett. c Codice del Consumo).</p>
+
+      <h3>Legge applicabile</h3>
+      <p>Il presente contratto è regolato dalla legge italiana. Per qualsiasi controversia è competente il foro di residenza del consumatore.</p>
+    </section>
+
+    <hr class="legal-divider">
+
+    <!-- ── SPEDIZIONI ── -->
+    <section class="legal-section" id="spedizioni">
+      <h2>Spedizioni</h2>
+      <p class="legal-updated">Ultimo aggiornamento: giugno 2026</p>
+
+      <h3>Costi di spedizione</h3>
+      <ul>
+        <li>Ordini fino a €34,99: spedizione a €5,00</li>
+        <li>Ordini da €35,00 in su: <strong>spedizione gratuita</strong></li>
+      </ul>
+
+      <h3>Tempi di consegna</h3>
+      <p>Le spedizioni vengono evase entro 3–5 giorni lavorativi dalla conferma del pagamento. I tempi di consegna stimati dopo la spedizione sono di 3–7 giorni lavorativi per l'Italia e l'Europa.</p>
+
+      <h3>Paesi di destinazione</h3>
+      <p>Spediamo in Italia e nei principali paesi europei (Germania, Francia, Spagna, Portogallo, Austria, Belgio, Paesi Bassi, Svizzera, Regno Unito, Svezia, Danimarca, Polonia).</p>
+
+      <h3>Tracciamento</h3>
+      <p>Ogni spedizione include un codice di tracciamento che verrà comunicato via email una volta affidata al corriere.</p>
+
+      <h3>Problemi con la spedizione</h3>
+      <p>In caso di pacco danneggiato o mancata consegna, scrivici a <a href="mailto:valerioxy6@gmail.com">valerioxy6@gmail.com</a> entro 7 giorni dalla data di consegna prevista.</p>
+    </section>
+
+    <hr class="legal-divider">
+
+    <!-- ── RESI E RIMBORSI ── -->
+    <section class="legal-section" id="resi">
+      <h2>Resi e Rimborsi</h2>
+      <p class="legal-updated">Ultimo aggiornamento: giugno 2026</p>
+
+      <h3>Diritto di recesso</h3>
+      <p>Ai sensi del D.Lgs. 206/2005 (Codice del Consumo), il consumatore ha diritto di recedere dal contratto entro <strong>14 giorni</strong> dalla ricezione del prodotto, senza necessità di fornire motivazioni.</p>
+
+      <h3>Eccezioni al diritto di recesso</h3>
+      <p>Il diritto di recesso <strong>non si applica</strong> a:</p>
+      <ul>
+        <li>Prodotti personalizzati o realizzati su misura (ordini custom)</li>
+        <li>Ordini "al buio" — il cliente accetta esplicitamente questa condizione al momento dell'acquisto</li>
+        <li>T-shirt o stampe 3D che presentino segni di utilizzo</li>
+      </ul>
+
+      <h3>Come esercitare il recesso</h3>
+      <p>Per esercitare il diritto di recesso scrivi a <a href="mailto:valerioxy6@gmail.com">valerioxy6@gmail.com</a> entro 14 giorni dalla ricezione, indicando il numero d'ordine e il motivo. Il prodotto deve essere restituito nelle condizioni originali entro 14 giorni dalla comunicazione. Le spese di reso sono a carico del cliente.</p>
+
+      <h3>Rimborso</h3>
+      <p>Una volta ricevuto e verificato il reso, il rimborso verrà effettuato entro 14 giorni tramite lo stesso metodo di pagamento utilizzato per l'acquisto.</p>
+
+      <h3>Prodotti difettosi</h3>
+      <p>Se hai ricevuto un prodotto difettoso o diverso da quanto ordinato, contattaci entro 7 giorni dalla ricezione. Provvederemo a sostituzione o rimborso integrale senza costi aggiuntivi per te.</p>
+    </section>
+
+    <a href="index.html" style="display:inline-block;font-family:var(--font-mono);font-size:13px;color:var(--text-dim);text-decoration:none;margin-top:16px;transition:color .2s;" onmouseover="this.style.color='var(--orange)'" onmouseout="this.style.color='var(--text-dim)'">← Torna al sito</a>
+
+  </main>
+
+</body>
+</html>
