@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ordine confermato — Valerio Ballaró</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="index.html" class="logo">
+        <img src="assets/images/logo.png" alt="VB logo" style="height:36px;width:auto;display:block;">
+      </a>
+    </div>
+  </header>
+
+  <main style="max-width:600px;margin:0 auto;padding:clamp(48px,10vw,120px) var(--pad-x);text-align:center;">
+    <div style="font-size:64px;margin-bottom:24px;">✓</div>
+    <h1 style="font-family:var(--font-display);font-size:clamp(28px,5vw,48px);text-transform:uppercase;margin-bottom:16px;">
+      Ordine confermato!
+    </h1>
+    <p style="font-family:var(--font-mono);font-size:14px;color:var(--text-dim);margin-bottom:40px;">
+      Grazie per il tuo acquisto. Riceverai una email di conferma a breve.<br>
+      Ti contatterò per la spedizione entro 24 ore.
+    </p>
+    <a href="index.html" class="btn btn--primary">← Torna al sito</a>
+  </main>
+
+  <script>
+    localStorage.removeItem('vb_cart_id');
+  </script>
+
+</body>
+</html>
