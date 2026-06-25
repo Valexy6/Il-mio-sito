@@ -105,7 +105,6 @@
 
       <!-- Stampa 3D Simulator -->
       <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;">
-        <p style="font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;color:var(--text-faint);text-transform:uppercase;">// stampa_3d_simulator.exe</p>
         <canvas id="stack-game" width="220" height="300" style="border:2px solid var(--border);display:block;background:#0d0d0d;cursor:pointer;" tabindex="0"></canvas>
         <p id="stack-hint" style="font-family:var(--font-mono);font-size:11px;color:var(--text-faint);">click o spazio per saltare — doppio salto disponibile</p>
       </div>
@@ -733,7 +732,7 @@
       player    = { x:38, y:GROUND-34, w:18, h:34, vy:0, grounded:true, jumps:0 };
       obstacles = [];
       score     = 0;
-      speed     = 2.8;
+      speed     = 2.2;
       frameCount= 0;
       lastSpawn = 0;
       state     = 'idle';
@@ -885,11 +884,11 @@
         // obstacles
         obstacles.forEach(function(ob){ob.x-=speed;});
         obstacles=obstacles.filter(function(ob){return ob.x+ob.w>-20;});
-        var minGap=Math.max(55,120-score);
+        var minGap=Math.max(80,150-score);
         if (frameCount-lastSpawn>minGap){spawnObstacle();lastSpawn=frameCount;}
         // score & speed
         if(frameCount%7===0) score++;
-        speed=Math.min(2.8+score*0.018,8);
+        speed=Math.min(2.2+score*0.012,6);
         // collision
         obstacles.forEach(function(ob){
           if(player.x+player.w-5>ob.x+4 && player.x+5<ob.x+ob.w-4 &&
