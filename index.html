@@ -106,7 +106,7 @@
       <!-- Stampa 3D Simulator -->
       <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;">
         <canvas id="stack-game" width="220" height="300" style="border:2px solid var(--border);display:block;background:#0d0d0d;cursor:pointer;" tabindex="0"></canvas>
-        <p id="stack-hint" style="font-family:var(--font-mono);font-size:11px;color:var(--text-faint);">click o spazio per saltare — doppio salto disponibile</p>
+        <p id="stack-hint" style="font-family:var(--font-mono);font-size:11px;color:var(--text-faint);"></p>
       </div>
 
       <!-- One Piece Jolly Roger — easter egg trigger -->
@@ -864,7 +864,7 @@
       if (state==='gameover') {
         ctx.fillStyle='rgba(0,0,0,0.82)'; ctx.fillRect(0,0,W,H);
         ctx.textAlign='center';
-        ctx.fillStyle=orange; ctx.font='bold 13px monospace'; ctx.fillText('FINALMENTE DORMITO',W/2,H/2-26);
+        ctx.fillStyle=orange; ctx.font='bold 13px monospace'; ctx.fillText('FINALMENTE POSSO DORMIRE',W/2,H/2-26);
         ctx.fillStyle='#9ca3af'; ctx.font='10px monospace';
         ctx.fillText('ore di insonnia: '+score,W/2,H/2-6);
         ctx.fillStyle=teal; ctx.fillText('[ click per riprovare ]',W/2,H/2+16);
