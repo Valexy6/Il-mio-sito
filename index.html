@@ -103,6 +103,13 @@
         </div>
       </div>
 
+      <!-- Stampa 3D Simulator -->
+      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;">
+        <p style="font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;color:var(--text-faint);text-transform:uppercase;">// stampa_3d_simulator.exe</p>
+        <canvas id="stack-game" width="220" height="300" style="border:2px solid var(--border);display:block;background:#0d0d0d;cursor:pointer;" tabindex="0"></canvas>
+        <p id="stack-hint" style="font-family:var(--font-mono);font-size:11px;color:var(--text-faint);">click o spazio per depositare il layer</p>
+      </div>
+
       <!-- One Piece Jolly Roger — easter egg trigger -->
       <div class="flag-container flag-container--corner flag-trigger" id="flag-trigger" role="button" tabindex="0" aria-label="..." title="">
         <svg class="flag-svg" viewBox="0 0 300 230" xmlns="http://www.w3.org/2000/svg">
@@ -712,6 +719,130 @@
     </form>
   </div>
 
+  <script>
+  (function(){
+    var canvas  = document.getElementById('stack-game');
+    var ctx     = canvas.getContext('2d');
+    var W = canvas.width, H = canvas.height;
+    var BLOCK_H = 18, SPEED_START = 1.8, MAX_SPEED = 5;
+    var orange  = '#fb923c', teal = '#2dd4bf', dim = '#374151';
+    var state, layers, current, score, speed, dir;
+
+    function reset() {
+      layers  = [{ x: 30, w: 160 }];
+      score   = 0;
+      speed   = SPEED_START;
+      dir     = 1;
+      state   = 'playing';
+      current = { x: 0, w: 160 };
+      document.getElementById('stack-hint').textContent = 'click o spazio per depositare il layer';
+      loop();
+    }
+
+    function drop() {
+      if (state === 'gameover') { reset(); return; }
+      var top   = layers[layers.length - 1];
+      var left  = Math.max(current.x, top.x);
+      var right = Math.min(current.x + current.w, top.x + top.w);
+      var newW  = right - left;
+      if (newW <= 0) { state = 'gameover'; return; }
+      layers.push({ x: left, w: newW });
+      score++;
+      speed = Math.min(SPEED_START + score * 0.12, MAX_SPEED);
+      current = { x: 0, w: newW };
+      if (layers.length > 14) layers.shift();
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      // base platform label
+      ctx.fillStyle = dim;
+      ctx.font = '9px monospace';
+      ctx.fillText('BASE PLATE', 30, H - 4);
+
+      // draw stacked layers
+      var totalLayers = layers.length;
+      layers.forEach(function(l, i) {
+        var y = H - 28 - i * (BLOCK_H + 2);
+        var progress = i / 14;
+        ctx.fillStyle = i === 0 ? '#1f2937' : (i % 2 === 0 ? orange : teal);
+        ctx.globalAlpha = 0.5 + progress * 0.5;
+        ctx.fillRect(l.x, y, l.w, BLOCK_H);
+        ctx.globalAlpha = 1;
+        // layer line detail
+        ctx.fillStyle = 'rgba(255,255,255,0.06)';
+        for (var row = 3; row < BLOCK_H; row += 4) {
+          ctx.fillRect(l.x + 2, y + row, l.w - 4, 1);
+        }
+      });
+
+      // draw moving block
+      if (state === 'playing') {
+        var topLayer = layers[layers.length - 1];
+        var movY = H - 28 - layers.length * (BLOCK_H + 2);
+        ctx.fillStyle = orange;
+        ctx.globalAlpha = 0.9;
+        ctx.fillRect(current.x, movY, current.w, BLOCK_H);
+        ctx.globalAlpha = 1;
+        // glow effect
+        ctx.shadowColor = orange;
+        ctx.shadowBlur  = 8;
+        ctx.fillRect(current.x, movY, current.w, 2);
+        ctx.shadowBlur  = 0;
+      }
+
+      // score
+      ctx.fillStyle = '#9ca3af';
+      ctx.font = 'bold 11px monospace';
+      ctx.fillText('LAYER: ' + score, 8, 18);
+
+      // game over
+      if (state === 'gameover') {
+        ctx.fillStyle = 'rgba(0,0,0,0.75)';
+        ctx.fillRect(0, 0, W, H);
+        ctx.fillStyle = orange;
+        ctx.font = 'bold 16px monospace';
+        ctx.textAlign = 'center';
+        ctx.fillText('PRINT FAILED', W/2, H/2 - 24);
+        ctx.fillStyle = '#9ca3af';
+        ctx.font = '11px monospace';
+        ctx.fillText('layers: ' + score, W/2, H/2);
+        ctx.fillStyle = teal;
+        ctx.font = '11px monospace';
+        ctx.fillText('[ click per riprovare ]', W/2, H/2 + 22);
+        ctx.textAlign = 'left';
+        document.getElementById('stack-hint').textContent = 'PRINT FAILED — ' + score + ' layer' + (score !== 1 ? 's' : '');
+      }
+    }
+
+    var animId;
+    function loop() {
+      if (animId) cancelAnimationFrame(animId);
+      function tick() {
+        if (state === 'playing') {
+          current.x += speed * dir;
+          var top = layers[layers.length - 1];
+          if (current.x + current.w > W - 10) dir = -1;
+          if (current.x < 10) dir = 1;
+        }
+        draw();
+        if (state !== 'gameover') animId = requestAnimationFrame(tick);
+        else draw();
+      }
+      tick();
+    }
+
+    canvas.addEventListener('click', drop);
+    document.addEventListener('keydown', function(e) {
+      if (e.code === 'Space' && document.activeElement === canvas) { e.preventDefault(); drop(); }
+    });
+    canvas.addEventListener('keydown', function(e) {
+      if (e.code === 'Space') { e.preventDefault(); drop(); }
+    });
+
+    reset();
+  })();
+  </script>
   <script src="js/reveal.js"></script>
   <script src="js/form.js"></script>
   <script src="js/cart.js"></script>
