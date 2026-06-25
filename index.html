@@ -335,12 +335,14 @@
         </article>
 
         <article class="product-card product-card--print reveal">
-          <div class="product-card__image product-card__image--print" style="display:flex;align-items:center;justify-content:center;font-size:56px;">🖨️</div>
+          <div class="product-card__image product-card__image--print">
+            <img src="assets/images/stampa-personalizzata.png" alt="Personalizza la tua statuetta" style="width:100%;height:100%;object-fit:cover;display:block;">
+          </div>
           <div class="product-card__body">
             <h4 class="product-card__name">Personalizza la tua statuetta</h4>
             <p class="product-card__desc">Mandami una foto, stampo quello che vuoi</p>
-            <div class="product-card__footer">
-              <span class="product-card__price product-card__price--orange">Su preventivo</span>
+            <div class="product-card__footer" style="flex-direction:column;align-items:center;gap:10px;text-align:center;">
+              <span class="product-card__price product-card__price--orange">Richiedi preventivo</span>
               <button class="buy-btn" onclick="openCustomModal('statuetta')">Personalizza →</button>
             </div>
           </div>
@@ -455,8 +457,8 @@
           <div class="product-card__body">
             <h4 class="product-card__name">Personalizza la tua t-shirt</h4>
             <p class="product-card__desc">Il tuo design, i tuoi colori, la tua taglia</p>
-            <div class="product-card__footer">
-              <span class="product-card__price product-card__price--teal">Su preventivo</span>
+            <div class="product-card__footer" style="flex-direction:column;align-items:center;gap:10px;text-align:center;">
+              <span class="product-card__price product-card__price--teal">Richiedi preventivo</span>
               <button class="buy-btn" onclick="openCustomModal('tshirt')">Personalizza →</button>
             </div>
           </div>
