@@ -1,17 +1,17 @@
-# PRD — valerioballarò.it
-**Versione:** 1.0  
-**Data:** 23 giugno 2026  
-**Autore:** Valerio Ballaró
+# PRD -- valerioballaro.it
+**Versione:** 2.0
+**Data:** 25 giugno 2026
+**Autore:** Valerio Ballaro
 
 ---
 
 ## 1. Panoramica
 
-Sito personale di Valerio Ballaró — sviluppatore, maker e creativo. Il sito ha tre anime:
+Sito personale di Valerio Ballaro -- sviluppatore, maker e creativo. Il sito ha tre anime:
 
-1. **Portfolio / presentazione** — chi sei, cosa fai, come contattarti
-2. **Shop** — vendita diretta di oggetti stampati in 3D e T-shirt personalizzate
-3. **Ordini su misura** — form per ricevere richieste custom
+1. **Portfolio / presentazione** -- chi sei, cosa fai, come contattarti
+2. **Shop** -- vendita diretta di oggetti stampati in 3D e T-shirt personalizzate, con carrello e checkout Stripe
+3. **Ordini su misura** -- form per richieste custom (stampe, t-shirt, siti web)
 
 Tutto in italiano. Tono diretto, ironico, personale.
 
@@ -21,129 +21,184 @@ Tutto in italiano. Tono diretto, ironico, personale.
 
 | Obiettivo | Metrica di successo |
 |-----------|-------------------|
-| Comunicare identità e competenze | Tempo medio sulla pagina > 1 min |
+| Comunicare identita e competenze | Tempo medio sulla pagina > 1 min |
 | Ricevere richieste di ordini custom | Form compilati / mese |
-| Vendere prodotti dello shop | Click su "Acquista" → conversioni |
+| Vendere prodotti dello shop | Click "Aggiungi al carrello" -> conversioni Stripe |
 | Essere memorabile e originale | Niente template, tutto fatto a mano |
 
 ---
 
 ## 3. Utenti target
 
-- **Clienti maker** — cercano oggetti 3D unici o T-shirt personalizzate
-- **Potenziali collaboratori / clienti dev** — vogliono capire chi sei prima di scriverti
-- **Curiosi notturni** — arrivano tardi, si aspettano risposta rapida
+- **Clienti maker** -- cercano oggetti 3D unici o T-shirt personalizzate
+- **Potenziali collaboratori / clienti dev** -- vogliono capire chi sei prima di scriverti
+- **Curiosi notturni** -- arrivano tardi, si aspettano risposta rapida
 
 ---
 
 ## 4. Struttura delle sezioni
 
 ### 4.1 Header / Nav
-- Logo `VB` con punto colorato
-- Link: About me · Shop · Ordine al buio · Ordini · Contatti
+- Logo VB (assets/images/logo.png con sfondo trasparente)
+- Link: About me - Shop - Ordine al buio - Ordini - Contatti
 - Sticky, minimale
+- Pulsante carrello con badge numerico
 
 ### 4.2 Hero
-- Titolo grande con nome e cognome
-- Tagline: "Scrivo codice. Stampo idee. Qualche volta le indosso."
-- CTA primario → Shop, secondario → Ordini personalizzati
-- Elemento visivo: bandiera One Piece con Jolly Roger animata (SVG inline, wave filter)
+- Titolo grande + tagline: "Scrivo codice. Stampo idee. Qualche volta le indosso."
+- CTA primario: Shop, secondario: Ordini personalizzati
+- Layout a due colonne: testo a sinistra, mini-gioco **Insonnia Runner** a destra
+
+#### Insonnia Runner (mini-gioco)
+- Canvas 220x300px, vanilla JS
+- Personaggio pixel che salta gli ostacoli (SPAZIO o click), doppio salto
+- Game over: "Finalmente posso dormire."
+- Difficolta progressiva
+- Easter egg: bandiera One Piece nel footer
 
 ### 4.3 Marquee
-- Strip animata con parole chiave: Codice · Stampa 3D · T-Shirt · Maker · Insonnia · Fatto a mano
+- Strip animata: Codice - Stampa 3D - T-Shirt - Maker - Insonnia - Fatto a mano
 
 ### 4.4 Chi sono
-- Testo breve in due paragrafi
-- Tre "soul card": Dev / Stampa 3D / T-Shirt
-- Callout "Dovresti sapere che" con immagine occhi sgranati e testo sull'insonnia creativa
+- Testo in due paragrafi + tre "soul card": Dev / Stampa 3D / T-Shirt
+- Callout "Dovresti sapere che" con testo sull'insonnia creativa
 
 ### 4.5 Shop
-- Due categorie: Oggetti stampati in 3D · T-shirt personalizzate
-- Grid 4 prodotti per categoria (8 totali)
-- Ogni card: immagine placeholder · nome · descrizione · prezzo · bottone "Acquista"
-- Badge per: Ed. limitata / Best seller / Fatto a mano / Pezzo unico / Su richiesta
 
-**Prodotti attuali:**
+#### Oggetti stampati in 3D (3 prodotti + 1 card Personalizza)
 
-| Categoria | Nome | Prezzo |
-|-----------|------|--------|
+| Nome | Descrizione | Prezzo |
+|------|-------------|--------|
+| Barca a vela | Simpatica e assolutamente inutile barca a vela da tenere sulla tua scrivania. | 13 EUR |
+| Busto a cuore aperto | Busto a cuore aperto, cosi potrai sembrare un amante dell'arte e sembrerai meno noioso. | 18 EUR |
+| Organizer Modulare | da definire | 16 EUR |
+| Personalizza la tua statuetta | Mandami una foto, dimmi cosa vuoi e cerchero di accontentarti. | Su preventivo |
 
-| T-shirt | Layer Lines | €26 |
+#### T-shirt personalizzate (3 prodotti + 1 card Personalizza)
 
+| Nome | Descrizione | Prezzo |
+|------|-------------|--------|
+| Il volto del Nord | da definire | da definire |
+| Fisico non mi tradire | da definire | 19 EUR |
+| Debug Sleep Repeat | Non e una t-shirt, e uno stile di vita. | da definire |
+| Personalizza la tua t-shirt | da definire | Su preventivo |
 
-### 4.6 Ordine al buio
-- Pagina separata (`buio.html`)
-- Concept: non scegli tu, sceglie Valerio per te
-- CTA: "Tenta la fortuna →"
+**Varianti t-shirt** su ogni card: Colore (Bianco/Nero), Taglia (S/M/L/XL), Genere (Uomo/Donna).
+Il nome nel carrello codifica le varianti (es. "Il volto del Nord -- Uomo -- M -- Bianco").
+
+**Lightbox**: cliccando l'immagine di una card si apre un ingrandimento a schermo intero.
+
+### 4.6 Ordine al buio (buio.html)
+- Non scegli tu, sceglie Valerio per te
+- Prezzo fisso: 10 EUR / pezzo, selettore quantita, totale in tempo reale
+- Checkout diretto via Stripe (senza carrello)
+- Non si accettano resi
 
 ### 4.7 Ordini su misura
-- Form con: Nome · Email · Tipo prodotto (select) · Descrizione · Budget (range slider €10–€2000) · Allegato (opzionale)
-- Stato di successo con messaggio personalizzato
-- Validazione client-side
+- Form: Nome - Email - Tipo (stampa 3D / t-shirt / sito web / altro) - Descrizione - Budget (slider 10-2000 EUR) - Allegato
+- Invio via Formspree (https://formspree.io/f/xzdlzyjb)
 
-### 4.8 Contatti
-- Email cliccabile
-- Link social: Instagram · GitHub · LinkedIn
-- Footer: tagline + crediti con tono ironico
+### 4.8 Contatti e Footer
+- Email: valerio.ballaroxy@gmail.com
+- Link social: GitHub + LinkedIn (https://www.linkedin.com/in/valerio-ballaro-dev-web-danalyst/)
+- Footer ironico + Easter egg nota + link note legali
 
 ---
 
-## 5. Stack tecnico
+## 5. Sistema di pagamento
+
+### Carrello localStorage
+- Key: vb_cart | Struttura: {id, name, price, quantity} | Prezzi in centesimi
+- API: window.CartVB = { add, remove, increase, decrease, checkout }
+- Drawer laterale + svuotamento automatico su success.html
+
+### Stripe Checkout (api/checkout.js su Vercel)
+- Secret key in env STRIPE_SECRET_KEY (mai nel codice)
+- Spedizione: < 35 EUR = 5 EUR; >= 35 EUR = gratuita
+- Raccolta: nome, indirizzo (IT + EU), email, telefono (facoltativo)
+- Paesi: IT, DE, FR, ES, PT, AT, BE, NL, CH, GB, SE, DK, PL
+- Redirect: successo -> /success.html, annulla -> /#shop
+
+### Modal Personalizza
+- Statuetta: allegato foto + descrizione
+- T-shirt: colore / taglia / genere + descrizione
+- Invio via Formspree
+
+---
+
+## 6. Stack tecnico
 
 | Aspetto | Scelta |
 |---------|--------|
-| Markup | HTML5 statico (no framework) |
-| CSS | Variabili custom + 4 file separati (variables / base / layout / components) |
-| JS | Vanilla — reveal.js (scroll animations) + form.js (validazione + submit) |
-| Font | Display + Mono (da definire) |
-| Colori principali | `--orange`, `--teal`, `--border`, sfondo scuro |
-| Hosting | Da definire (GitHub Pages / Netlify / VPS) |
-| Form backend | Da definire (Formspree / endpoint custom) |
+| Markup | HTML5 statico, no framework |
+| CSS | variables.css / base.css / layout.css / components.css |
+| JS | Vanilla: reveal.js + form.js + cart.js + inline (game, modal, lightbox) |
+| Mini-gioco | Canvas 2D inline in index.html |
+| Hosting | Vercel |
+| Pagamenti | Stripe Checkout live |
+| Form backend | Formspree (xzdlzyjb) |
+| Deploy | GitHub (https://github.com/Valexy6/Il-mio-sito.git) |
 
 ---
 
-## 6. Lavori in corso / TODO
+## 7. Pagine
 
-### Must have
-- [ ] Sostituire tutti i placeholder immagine con foto/render reali dei prodotti
-- [ ] Collegare i bottoni "Acquista" (Stripe / link esterno / carrello)
-- [ ] Collegare il form ordini a un backend reale (email / Notion / DB)
-- [ ] Aggiungere link reali ai social
-- [ ] Completare `buio.html` con logica "ordine casuale"
-- [ ] SEO base: meta description, OG tags, favicon
+| File | Descrizione |
+|------|-------------|
+| index.html | Pagina principale |
+| buio.html | Ordine al buio -- checkout diretto Stripe |
+| success.html | Conferma pagamento + svuota carrello |
+| legal.html | Note legali complete |
 
-### Nice to have
-- [ ] Animazione hover sulle product card con anteprima prodotto
-- [ ] Filtro categorie nello shop
-- [ ] Pagina dettaglio prodotto
-- [ ] Integrazione pagamento (Stripe Checkout)
-- [ ] CMS leggero per gestire i prodotti senza toccare il codice
-- [ ] Dark/light mode toggle
+---
 
-### Già fatto
+## 8. Note legali (legal.html)
+
+- Privacy Policy (GDPR, terze parti: Stripe/Formspree/Vercel)
+- Cookie Policy (solo vb_cart localStorage, nessun tracciamento)
+- Termini e Condizioni
+- Spedizioni (costi, tempi, paesi)
+- Resi e Rimborsi (14 gg, eccezioni per custom/buio)
+
+Titolare: Valerio Ballaro, privato cittadino -- valerio.ballaroxy@gmail.com
+
+---
+
+## 9. Todo
+
+- [ ] Immagine + descrizione per "Organizer Modulare" (16 EUR)
+- [ ] Immagine + nome definitivo per la quarta t-shirt
+- [ ] Prezzi mancanti: Il volto del Nord, Debug Sleep Repeat
+- [ ] Completare verifica identita Stripe (documento + IBAN) per live payments
+- [ ] OG image aggiornata per social preview
+- [ ] Meta description ottimizzata
+
+---
+
+## 10. Gia fatto
+
 - [x] Layout completo con tutte le sezioni
-- [x] Animazioni scroll reveal
-- [x] Marquee animato
-- [x] Bandiera SVG animata nell'hero
-- [x] Form con validazione client-side e stato di successo
-- [x] Budget slider
-- [x] Callout "insonnia" con immagine custom
-- [x] Tono di voce coerente in tutto il sito
+- [x] Animazioni scroll reveal + marquee animato
+- [x] Mini-gioco Insonnia Runner (canvas vanilla JS)
+- [x] Lightbox immagini prodotto
+- [x] Carrello localStorage con drawer laterale
+- [x] Stripe Checkout con spedizione condizionale (gratis >= 35 EUR)
+- [x] Raccolta indirizzo + telefono al checkout
+- [x] Varianti t-shirt (colore/taglia/genere) con encoding nel nome
+- [x] Modal "Personalizza" per statuette e t-shirt
+- [x] Ordine al buio con checkout diretto
+- [x] success.html con svuotamento carrello
+- [x] Note legali complete (legal.html)
+- [x] Form ordini personalizzati con Formspree
+- [x] Link LinkedIn
+- [x] Easter egg bandiera nel footer
 
 ---
 
-## 7. Tono di voce
+## 11. Tono di voce e identita visiva
 
-- Diretto, senza fronzoli
-- Ironico ma non caricaturale ("contribuisci al mio fondo melatonina")
-- Personale: parla in prima persona
-- Notturno / maker — l'insonnia è un tratto identitario, non un difetto
-
----
-
-## 8. Identità visiva
-
+- Diretto, ironico, personale -- parla in prima persona
+- L'insonnia e un tratto identitario, non un difetto
 - Palette scura con accenti teal e arancione
 - Tipografia forte, uppercase per i titoli di sezione
-- Elementi hand-crafted (SVG inline, badge manuali)
-- Nessuna immagine stock — solo roba fatta da te
+- Nessuna immagine stock -- solo roba fatta da te
